@@ -1,8 +1,10 @@
 package com.ratiug.dev.colormatchgame;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.renderscript.Sampler;
@@ -20,6 +22,7 @@ public class GameFragment extends Fragment {
     private TextView tvNameRight,tvNameWrong,tvRightValue,tvWrongValue,tvRecordValue,tvColor1,tvColor2;
     private Button btnYes,btnNo;
     private  boolean correctAnswer = false;
+    SharedPreferencesHelper mSharedPreferencesHelper;
     int [] colors;
     String [] color_names;
     public int rightAnswer,wrongAnswer,record;
@@ -32,7 +35,9 @@ public class GameFragment extends Fragment {
         tvWrongValue = getActivity().findViewById(R.id.tv_wrong_value);
         tvRecordValue = getActivity().findViewById(R.id.tv_record_value);
         colors = getContext().getResources().getIntArray(R.array.colors);
+        mSharedPreferencesHelper = new SharedPreferencesHelper(getContext());
         color_names = getContext().getResources().getStringArray(R.array.color_names);
+        record =mSharedPreferencesHelper.getRecord();
         showRightWrongAnswerViews();
     }
 
@@ -100,8 +105,7 @@ public class GameFragment extends Fragment {
     private void plusRight(){
         rightAnswer = rightAnswer + 1;
         if (rightAnswer > record){
-            record = rightAnswer;
-            tvRecordValue.setText(valueOf(record));
+           setRecord();
         }
         tvRightValue.setText(valueOf(rightAnswer));
     }
@@ -109,5 +113,17 @@ public class GameFragment extends Fragment {
     private void plusWrong(){
         wrongAnswer = wrongAnswer + 1;
         tvWrongValue.setText(valueOf(wrongAnswer));
+    }
+
+    private  void setRecord(){
+        record = rightAnswer;
+        tvRecordValue.setText(valueOf(record));
+        mSharedPreferencesHelper.setRecord(record);
+    }
+
+    @Override
+    public void onDestroyView() {
+        hideRightWrongAnswerViews();
+        super.onDestroy();
     }
 }
