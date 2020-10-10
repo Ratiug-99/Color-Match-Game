@@ -11,4 +11,13 @@
     <string name="yes">YES</string>
     <string name="no">No</string>
     <string name="time_left_00_00">Time left: 00:00</string>
+
+
+    <string-array name="color_names">
+            <item>"White"</item>
+            <item>"Yellow"</item>
+            <item>"Red"</item>
+            <item>"Green"</item>
+            <item>"Blue"</item>
+    </string-array>
 </resources>

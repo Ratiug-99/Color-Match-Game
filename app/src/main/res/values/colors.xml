@@ -20,4 +20,12 @@
     <color name="blue">#0000FF</color>
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
+
+    <array name="colors">
+        <item>@color/white</item>
+        <item>@color/yellow</item>
+        <item>@color/red</item>
+        <item>@color/green</item>
+        <item>@color/blue</item>
+    </array>
 </resources>
