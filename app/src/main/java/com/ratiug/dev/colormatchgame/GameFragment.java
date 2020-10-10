@@ -1,13 +1,20 @@
 package com.ratiug.dev.colormatchgame;
 
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.IBinder;
 import android.renderscript.Sampler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +26,22 @@ import java.util.Random;
 import static java.lang.String.valueOf;
 
 public class GameFragment extends Fragment {
-    private TextView tvNameRight,tvNameWrong,tvRightValue,tvWrongValue,tvRecordValue,tvColor1,tvColor2;
+    public static final String TAG = "DBG | GaeFragment";
+
+    public static final String  KEY_BROADCAST_RECEIVER_TICK = "com.ratiug.dev.colormatchgame.tick.timer";
+    public static final String KEY_TIME_VALUE = "KEY_TIME_VALUE";
+    private TextView tvNameRight,tvNameWrong,tvRightValue,tvWrongValue,tvRecordValue,tvColor1,tvTimeLeft;
     private Button btnYes,btnNo;
+    public int rightAnswer,wrongAnswer,record;
     private  boolean correctAnswer = false;
     SharedPreferencesHelper mSharedPreferencesHelper;
     int [] colors;
     String [] color_names;
-    public int rightAnswer,wrongAnswer,record;
+    TimerService timerService;
+    ServiceConnection serviceConnection;
+    BroadcastReceiver broadcastReceiver;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +50,27 @@ public class GameFragment extends Fragment {
         tvRightValue = getActivity().findViewById(R.id.tv_right_value);
         tvWrongValue = getActivity().findViewById(R.id.tv_wrong_value);
         tvRecordValue = getActivity().findViewById(R.id.tv_record_value);
+
         colors = getContext().getResources().getIntArray(R.array.colors);
-        mSharedPreferencesHelper = new SharedPreferencesHelper(getContext());
         color_names = getContext().getResources().getStringArray(R.array.color_names);
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                String value = intent.getStringExtra(KEY_TIME_VALUE);
+                Log.d(TAG, "onReceive: " + value);
+                if (!value.equals("Finish")) {
+                    tvTimeLeft.setText(getContext().getText(R.string.time_left_00_00) + value);
+                }else{
+                    btnNo.setEnabled(false);
+                    btnYes.setEnabled(false);
+                }
+
+            }
+        };
+        getActivity().registerReceiver(broadcastReceiver,new IntentFilter(KEY_BROADCAST_RECEIVER_TICK));
+        mSharedPreferencesHelper = new SharedPreferencesHelper(getContext());
         record =mSharedPreferencesHelper.getRecord();
         showRightWrongAnswerViews();
     }
@@ -59,12 +93,30 @@ public class GameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
        View view =  inflater.inflate(R.layout.fragment_game, container, false);
         tvColor1 = view.findViewById(R.id.tv_color_one);
         btnYes = view.findViewById(R.id.btnYes);
         btnNo = view.findViewById(R.id.btnNo);
+        tvTimeLeft = view.findViewById(R.id.tv_time_left);
+
         setColorAndValues();
+
+        serviceConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                timerService = ((TimerService.MyBinder) iBinder).getService();
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+
+            }
+        };
+
+        Intent mIntent = new Intent(getContext(),TimerService.class);
+       getActivity().bindService(mIntent,serviceConnection,0);
+        getContext().startService(mIntent);
+
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,6 +142,7 @@ public class GameFragment extends Fragment {
                 setColorAndValues();
             }
         });
+
        return view;
     }
 
@@ -123,7 +176,9 @@ public class GameFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().unregisterReceiver(broadcastReceiver);
+        getActivity().stopService(new Intent(getContext(),TimerService.class));
         hideRightWrongAnswerViews();
-        super.onDestroy();
     }
 }
