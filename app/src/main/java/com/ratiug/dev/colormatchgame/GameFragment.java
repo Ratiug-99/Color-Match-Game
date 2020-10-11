@@ -33,6 +33,11 @@ public class GameFragment extends Fragment {
     private TextView tvNameRight,tvNameWrong,tvRightValue,tvWrongValue,tvRecordValue,tvColor1,tvTimeLeft;
     private Button btnYes,btnNo;
     public int rightAnswer,wrongAnswer,record;
+    int color1;
+    int valueColor1;
+    int oldColor1 = -1;
+    int oldValueColor1 = -1;
+    private boolean differentValues = true;
     private  boolean correctAnswer = false;
     SharedPreferencesHelper mSharedPreferencesHelper;
     int [] colors;
@@ -59,7 +64,6 @@ public class GameFragment extends Fragment {
             public void onReceive(Context context, Intent intent) {
 
                 String value = intent.getStringExtra(KEY_TIME_VALUE);
-                Log.d(TAG, "onReceive: " + value);
                 if (!value.equals("Finish")) {
                     tvTimeLeft.setText(getContext().getText(R.string.time_left_00_00) + value);
                 }else{
@@ -148,8 +152,22 @@ public class GameFragment extends Fragment {
 
     private void setColorAndValues(){
         Random rnd = new Random();
-        int color1 = rnd.nextInt(colors.length);
-        int valueColor1 = rnd.nextInt(color_names.length);
+
+
+        do{
+            color1 = rnd.nextInt(colors.length);
+            valueColor1 = rnd.nextInt(color_names.length);
+            if (color1 != oldColor1 && valueColor1 != oldValueColor1){
+                differentValues = true;
+                oldColor1 = color1;
+                oldValueColor1 = valueColor1;
+            }else{
+                differentValues = false;
+                Log.d(TAG, "setColorAndValues: false");
+            }
+
+        }while (!differentValues);
+
         correctAnswer = color1 == valueColor1;
         tvColor1.setText(color_names[valueColor1]);
         tvColor1.setTextColor(colors[color1]);
