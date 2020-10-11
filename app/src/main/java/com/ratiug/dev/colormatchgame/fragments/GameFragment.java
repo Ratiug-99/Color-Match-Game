@@ -116,6 +116,12 @@ public class GameFragment extends Fragment {
         tvNameWrong.setVisibility(View.GONE);
         tvRightValue.setVisibility(View.GONE);
         tvWrongValue.setVisibility(View.GONE);
+
+        rightAnswer = 0;
+        wrongAnswer = 0;
+
+        tvRightValue.setText(valueOf(rightAnswer));
+        tvWrongValue.setText(valueOf(wrongAnswer));
     }
 
 
@@ -182,7 +188,7 @@ public class GameFragment extends Fragment {
         do {
             color1 = rnd.nextInt(colors.length);
             valueColor1 = rnd.nextInt(color_names.length);
-            if (color1 != oldColor1 && valueColor1 != oldValueColor1) {
+            if (color1 != oldColor1 || valueColor1 != oldValueColor1) {
                 differentValues = true;
                 oldColor1 = color1;
                 oldValueColor1 = valueColor1;
