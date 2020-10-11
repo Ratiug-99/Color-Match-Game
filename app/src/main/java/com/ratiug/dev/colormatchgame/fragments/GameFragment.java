@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -72,9 +73,9 @@ public class GameFragment extends Fragment {
                 } else {
 
                         if (Build.VERSION.SDK_INT >= 26) {
-                            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(150,10));
+                            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(200,10));
                         } else {
-                            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(150);
+                            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(200);
                         }
 
                     btnNo.setEnabled(false);
@@ -205,7 +206,7 @@ public class GameFragment extends Fragment {
 
     private void plusRight() {
         rightAnswer = rightAnswer + 1;
-        if (rightAnswer > record) {
+        if (rightAnswer > record ) {
             setRecord();
         }
         tvRightValue.setText(valueOf(rightAnswer));
@@ -213,6 +214,24 @@ public class GameFragment extends Fragment {
 
     private void plusWrong() {
         wrongAnswer = wrongAnswer + 1;
+        if (Build.VERSION.SDK_INT >= 26) {
+            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(100,100));
+        } else {
+            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(100);
+        }
+        if (wrongAnswer == 10){
+            GameOverFragment gameOverFragment = new GameOverFragment();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fl_container, gameOverFragment)
+                    .addToBackStack(null)
+                    .commit();
+            long[] mice = {0,400,100,500};
+            if (Build.VERSION.SDK_INT >= 26) {
+                ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createWaveform(mice,-1));
+            } else {
+                ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(400);
+            }
+        }
         tvWrongValue.setText(valueOf(wrongAnswer));
     }
 
