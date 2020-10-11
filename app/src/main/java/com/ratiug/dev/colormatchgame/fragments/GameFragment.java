@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -72,11 +71,11 @@ public class GameFragment extends Fragment {
                     tvTimeLeft.setText(getContext().getText(R.string.time_left_00_00) + value);
                 } else {
 
-                        if (Build.VERSION.SDK_INT >= 26) {
-                            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(200,10));
-                        } else {
-                            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(200);
-                        }
+                    if (Build.VERSION.SDK_INT >= 26) {
+                        ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(200, 10));
+                    } else {
+                        ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(200);
+                    }
 
                     btnNo.setEnabled(false);
                     btnYes.setEnabled(false);
@@ -89,10 +88,10 @@ public class GameFragment extends Fragment {
                     } else {
                         FinishGameFragment finishGameFragment = new FinishGameFragment();
                         Bundle args = new Bundle();
-                        args.putInt(FinishGameFragment.KEY_SCORE,rightAnswer);
+                        args.putInt(FinishGameFragment.KEY_SCORE, rightAnswer);
                         finishGameFragment.setArguments(args);
                         getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fl_container,finishGameFragment)
+                                .replace(R.id.fl_container, finishGameFragment)
                                 .addToBackStack(null)
                                 .commit();
                     }
@@ -184,21 +183,25 @@ public class GameFragment extends Fragment {
 
     private void setColorAndValues() {
         Random rnd = new Random();
+        boolean choice = rnd.nextBoolean();
+        if (choice) {
+            int temp = rnd.nextInt(color_names.length);
+            color1 = temp;
+            valueColor1 = temp;
+        } else {
+            do {
+                color1 = rnd.nextInt(colors.length);
+                valueColor1 = rnd.nextInt(color_names.length);
+                if (color1 != oldColor1 || valueColor1 != oldValueColor1) {
+                    differentValues = true;
+                    oldColor1 = color1;
+                    oldValueColor1 = valueColor1;
+                } else {
+                    differentValues = false;
+                }
 
-
-        do {
-            color1 = rnd.nextInt(colors.length);
-            valueColor1 = rnd.nextInt(color_names.length);
-            if (color1 != oldColor1 || valueColor1 != oldValueColor1) {
-                differentValues = true;
-                oldColor1 = color1;
-                oldValueColor1 = valueColor1;
-            } else {
-                differentValues = false;
-            }
-
-        } while (!differentValues);
-
+            } while (!differentValues);
+        }
         correctAnswer = color1 == valueColor1;
         tvColor1.setText(color_names[valueColor1]);
         tvColor1.setTextColor(colors[color1]);
@@ -206,7 +209,7 @@ public class GameFragment extends Fragment {
 
     private void plusRight() {
         rightAnswer = rightAnswer + 1;
-        if (rightAnswer > record ) {
+        if (rightAnswer > record) {
             setRecord();
         }
         tvRightValue.setText(valueOf(rightAnswer));
@@ -215,19 +218,19 @@ public class GameFragment extends Fragment {
     private void plusWrong() {
         wrongAnswer = wrongAnswer + 1;
         if (Build.VERSION.SDK_INT >= 26) {
-            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(100,100));
+            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(100, 100));
         } else {
             ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(100);
         }
-        if (wrongAnswer == 10){
+        if (wrongAnswer == 10) {
             GameOverFragment gameOverFragment = new GameOverFragment();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fl_container, gameOverFragment)
                     .addToBackStack(null)
                     .commit();
-            long[] mice = {0,400,100,500};
+            long[] mice = {0, 400, 100, 500};
             if (Build.VERSION.SDK_INT >= 26) {
-                ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createWaveform(mice,-1));
+                ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createWaveform(mice, -1));
             } else {
                 ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(400);
             }
