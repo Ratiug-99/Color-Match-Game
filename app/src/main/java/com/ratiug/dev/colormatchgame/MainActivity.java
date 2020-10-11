@@ -1,20 +1,23 @@
 package com.ratiug.dev.colormatchgame;
 
+import android.os.Bundle;
+import android.os.Handler;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+import com.ratiug.dev.colormatchgame.fragments.ToStartFragment;
 
 import static java.lang.String.valueOf;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferencesHelper mSharedPreferencesHelper;
+    boolean doubleBackToExitPressedOnce = false;
     private TextView tvRecordValue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void openToStartFragment(){
+    private void openToStartFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fl_container, new ToStartFragment());
@@ -34,16 +37,17 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    boolean doubleBackToExitPressedOnce = false;
-
     @Override
     public void onBackPressed() {
         int countFragment = getSupportFragmentManager().getBackStackEntryCount();
-
-        if (countFragment == 1) {
-
+        if (countFragment >= 3) {
+            while (countFragment != 2) {
+                countFragment = getSupportFragmentManager().getBackStackEntryCount();
+                super.onBackPressed();
+            }
+        } else if (countFragment == 1) {
             if (doubleBackToExitPressedOnce) {
-              System.exit(0);
+                System.exit(0);
             }
 
             this.doubleBackToExitPressedOnce = true;
@@ -56,9 +60,8 @@ public class MainActivity extends AppCompatActivity {
                     doubleBackToExitPressedOnce = false;
                 }
             }, 2000);
-        } else   {
+        } else {
             super.onBackPressed();
-            return;
         }
     }
 

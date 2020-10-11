@@ -11,13 +11,14 @@
     <string name="yes">YES</string>
     <string name="no">No</string>
     <string name="time_left_00_00">Time left: \t</string>
+    <string name="new_record">New record:</string>
 
 
     <string-array name="color_names">
-            <item>"White"</item>
-            <item>"Yellow"</item>
-            <item>"Red"</item>
-            <item>"Green"</item>
-            <item>"Blue"</item>
+        <item>"White"</item>
+        <item>"Yellow"</item>
+        <item>"Red"</item>
+        <item>"Green"</item>
+        <item>"Blue"</item>
     </string-array>
 </resources>
