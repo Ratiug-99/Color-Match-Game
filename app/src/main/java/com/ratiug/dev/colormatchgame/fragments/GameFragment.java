@@ -6,8 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,7 @@ import com.ratiug.dev.colormatchgame.TimerService;
 
 import java.util.Random;
 
+import static android.content.Context.VIBRATOR_SERVICE;
 import static java.lang.String.valueOf;
 
 public class GameFragment extends Fragment {
@@ -66,12 +70,28 @@ public class GameFragment extends Fragment {
                 if (!value.equals("Finish")) {
                     tvTimeLeft.setText(getContext().getText(R.string.time_left_00_00) + value);
                 } else {
+
+                        if (Build.VERSION.SDK_INT >= 26) {
+                            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(150,10));
+                        } else {
+                            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(150);
+                        }
+
                     btnNo.setEnabled(false);
                     btnYes.setEnabled(false);
                     if (newRecord) {
                         NewRecordFragment recordFragment = new NewRecordFragment();
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fl_container, recordFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    } else {
+                        FinishGameFragment finishGameFragment = new FinishGameFragment();
+                        Bundle args = new Bundle();
+                        args.putInt(FinishGameFragment.KEY_SCORE,rightAnswer);
+                        finishGameFragment.setArguments(args);
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fl_container,finishGameFragment)
                                 .addToBackStack(null)
                                 .commit();
                     }
