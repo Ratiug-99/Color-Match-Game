@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context=".activities.SettingsActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llc_topBar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="start"
+        android:orientation="horizontal"
+
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:text="@string/settings"
+            style="@style/topBarItems"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/llc_topBar"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_count_numbers"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_margin="16dp"
+        android:textColor="@color/white"
+        android:text="@string/select_count_numbers"/>
+
+    <Spinner
+        android:id="@+id/s_colors_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_count_numbers"
+        app:layout_constraintBottom_toBottomOf="@id/tv_count_numbers"
+        android:entries="@array/count_colors_for_select"
+        />
+
+    <TextView
+        android:id="@+id/tv_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/theme"
+        app:layout_constraintTop_toBottomOf="@id/tv_count_numbers"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_margin="16dp"/>
+
+    <ToggleButton
+        android:id="@+id/tg_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.DrawerArrowToggle"
+        app:layout_constraintTop_toTopOf="@id/tv_theme"
+        app:layout_constraintBottom_toBottomOf="@id/tv_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="1dp"/>
+
+    <TextView
+        android:id="@+id/tv_languag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/language"
+        app:layout_constraintTop_toBottomOf="@id/tv_theme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_margin="16dp"/>
+
+    <RadioGroup
+        android:id="@+id/rg_language_group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tv_languag">
+
+        <RadioButton
+            android:id="@+id/rb_english"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:text="@string/english"/>
+
+        <RadioButton
+            android:id="@+id/rb_russian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:text="@string/russian"/>
+
+        <RadioButton
+            android:id="@+id/rb_ukrainian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/ukrainian"
+            android:layout_margin="16dp"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_vibration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vibration"
+        app:layout_constraintTop_toBottomOf="@id/rg_language_group"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+
+    <CheckBox
+        android:id="@+id/cb_vibration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tv_vibration"
+        app:layout_constraintBottom_toBottomOf="@id/tv_vibration"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

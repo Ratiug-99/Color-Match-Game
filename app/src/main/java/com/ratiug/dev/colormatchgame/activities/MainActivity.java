@@ -1,4 +1,4 @@
-package com.ratiug.dev.colormatchgame;
+package com.ratiug.dev.colormatchgame.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.ratiug.dev.colormatchgame.R;
+import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 import com.ratiug.dev.colormatchgame.fragments.ToStartFragment;
 
 import static java.lang.String.valueOf;

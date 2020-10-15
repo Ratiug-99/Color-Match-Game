@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -30,26 +31,19 @@ public class TimerService extends Service {
         countDownTimer = new CountDownTimer(61000, 1000) { //61
             @Override
             public void onTick(long mlsToFinish) {
-
+                Log.d(TAG, "onTick: " + mlsToFinish);
                 sendBroadcast(new Intent(GameFragment.KEY_BROADCAST_RECEIVER_TICK)
-                        .putExtra(GameFragment.KEY_TIME_VALUE, convertMlsToCorrectDateFormateString(mlsToFinish)));
-
-
+                        .putExtra(GameFragment.KEY_TIME_VALUE_LONG,mlsToFinish));
             }
 
             @Override
             public void onFinish() {
-                sendBroadcast(new Intent(GameFragment.KEY_BROADCAST_RECEIVER_TICK).putExtra(GameFragment.KEY_TIME_VALUE, "Finish"));
+                sendBroadcast(new Intent(GameFragment.KEY_BROADCAST_RECEIVER_TICK).putExtra(GameFragment.KEY_TIME_VALUE_STRING, "Finish"));
             }
         }.start();
     }
 
-    private String convertMlsToCorrectDateFormateString(long mls) {
-        SimpleDateFormat formatter = new SimpleDateFormat("mm:ss", Locale.UK);
-        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date date = new Date(mls);
-        return formatter.format(date);
-    }
+
 
     @Override
     public void onDestroy() {

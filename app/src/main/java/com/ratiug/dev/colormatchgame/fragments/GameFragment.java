@@ -11,10 +11,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.renderscript.Sampler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -23,7 +26,11 @@ import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 import com.ratiug.dev.colormatchgame.TimerService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
+import java.util.TimeZone;
 
 import static android.content.Context.VIBRATOR_SERVICE;
 import static java.lang.String.valueOf;
@@ -32,7 +39,8 @@ public class GameFragment extends Fragment {
     public static final String TAG = "DBG | GaeFragment";
 
     public static final String KEY_BROADCAST_RECEIVER_TICK = "com.ratiug.dev.colormatchgame.tick.timer";
-    public static final String KEY_TIME_VALUE = "KEY_TIME_VALUE";
+    public static final String KEY_TIME_VALUE_STRING = "KEY_TIME_VALUE";
+    public static final String KEY_TIME_VALUE_LONG = "KEY_TIME_VALUE";
     public int rightAnswer, wrongAnswer, record;
     int color1;
     int valueColor1;
@@ -47,6 +55,7 @@ public class GameFragment extends Fragment {
     BroadcastReceiver broadcastReceiver;
     private TextView tvNameRight, tvNameWrong, tvRightValue, tvWrongValue, tvRecordValue, tvColor1, tvTimeLeft;
     private Button btnYes, btnNo;
+    private ProgressBar pbTimeLeft;
     private boolean differentValues = true;
     private boolean correctAnswer = false;
 
@@ -58,47 +67,9 @@ public class GameFragment extends Fragment {
         tvRightValue = getActivity().findViewById(R.id.tv_right_value);
         tvWrongValue = getActivity().findViewById(R.id.tv_wrong_value);
         tvRecordValue = getActivity().findViewById(R.id.tv_record_value);
-
+        Log.d(TAG, "onCreate: ");
         colors = getContext().getResources().getIntArray(R.array.colors);
         color_names = getContext().getResources().getStringArray(R.array.color_names);
-
-        broadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-                String value = intent.getStringExtra(KEY_TIME_VALUE);
-                if (!value.equals("Finish")) {
-                    tvTimeLeft.setText(getContext().getText(R.string.time_left_00_00) + value);
-                } else {
-
-                    if (Build.VERSION.SDK_INT >= 26) {
-                        ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(200, 10));
-                    } else {
-                        ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(200);
-                    }
-
-                    btnNo.setEnabled(false);
-                    btnYes.setEnabled(false);
-                    if (newRecord) {
-                        NewRecordFragment recordFragment = new NewRecordFragment();
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fl_container, recordFragment)
-                                .addToBackStack(null)
-                                .commit();
-                    } else {
-                        FinishGameFragment finishGameFragment = new FinishGameFragment();
-                        Bundle args = new Bundle();
-                        args.putInt(FinishGameFragment.KEY_SCORE, rightAnswer);
-                        finishGameFragment.setArguments(args);
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fl_container, finishGameFragment)
-                                .addToBackStack(null)
-                                .commit();
-                    }
-                }
-
-            }
-        };
         mSharedPreferencesHelper = new SharedPreferencesHelper(getContext());
         record = mSharedPreferencesHelper.getRecord();
         showRightWrongAnswerViews();
@@ -133,26 +104,10 @@ public class GameFragment extends Fragment {
         btnYes = view.findViewById(R.id.btnYes);
         btnNo = view.findViewById(R.id.btnNo);
         tvTimeLeft = view.findViewById(R.id.tv_time_left);
-
-        getActivity().registerReceiver(broadcastReceiver, new IntentFilter(KEY_BROADCAST_RECEIVER_TICK));
-
-        setColorAndValues();
-
-        serviceConnection = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                timerService = ((TimerService.MyBinder) iBinder).getService();
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName componentName) {
-
-            }
-        };
-
-        Intent mIntent = new Intent(getContext(), TimerService.class);
-        getActivity().bindService(mIntent, serviceConnection, 0);
-        getContext().startService(mIntent);
+        pbTimeLeft = view.findViewById(R.id.pb_time_left);
+        //pbTimeLeft.setMax(61000);
+        pbTimeLeft.setProgress(50);
+        Log.d(TAG, "onCreateView: +");
 
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,9 +140,19 @@ public class GameFragment extends Fragment {
         Random rnd = new Random();
         boolean choice = rnd.nextBoolean();
         if (choice) {
+            do {
             int temp = rnd.nextInt(color_names.length);
+            if (temp != oldColor1){
+                differentValues = true;
+            }
+            else {
+                differentValues = false;
+            }
             color1 = temp;
             valueColor1 = temp;
+            oldColor1 = color1;
+            oldValueColor1 = valueColor1;
+            } while (!differentValues);
         } else {
             do {
                 color1 = rnd.nextInt(colors.length);
@@ -199,16 +164,17 @@ public class GameFragment extends Fragment {
                 } else {
                     differentValues = false;
                 }
-
             } while (!differentValues);
         }
         correctAnswer = color1 == valueColor1;
+        Log.d(TAG, "setColorAndValues: " + color1 + " " + valueColor1);
         tvColor1.setText(color_names[valueColor1]);
         tvColor1.setTextColor(colors[color1]);
     }
 
     private void plusRight() {
         rightAnswer = rightAnswer + 1;
+
         if (rightAnswer > record) {
             setRecord();
         }
@@ -248,7 +214,7 @@ public class GameFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        getActivity().stopService(new Intent(getContext(), TimerService.class));
+
         hideRightWrongAnswerViews();
     }
 
@@ -256,6 +222,72 @@ public class GameFragment extends Fragment {
     @Override
     public void onStop() {
         getActivity().unregisterReceiver(broadcastReceiver);
+        getActivity().stopService(new Intent(getContext(), TimerService.class));
+        hideRightWrongAnswerViews();
         super.onStop();
+    }
+
+    @Override
+    public void onResume() {
+        Log.d(TAG, "onResume: ");
+        showRightWrongAnswerViews();
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String value = convertMlsToCorrectDateFormateString(intent.getLongExtra(KEY_TIME_VALUE_LONG,0));
+                long timeLeft = intent.getLongExtra(KEY_TIME_VALUE_LONG,0);
+                if (!value.equals("Finish")) {
+                    tvTimeLeft.setText(getContext().getText(R.string.time_left_00_00) + value);
+                    pbTimeLeft.setProgress((int) timeLeft);
+                } else {
+                    if (Build.VERSION.SDK_INT >= 26) {
+                        ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(500,-1));
+                    } else {
+                        ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(200);
+                    }
+                    btnNo.setEnabled(false);
+                    btnYes.setEnabled(false);
+                    if (newRecord) {
+                        NewRecordFragment recordFragment = new NewRecordFragment();
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fl_container, recordFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    } else {
+                        FinishGameFragment finishGameFragment = new FinishGameFragment();
+                        Bundle args = new Bundle();
+                        args.putInt(FinishGameFragment.KEY_SCORE, rightAnswer);
+                        finishGameFragment.setArguments(args);
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fl_container, finishGameFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                }
+            }
+        };
+        getActivity().registerReceiver(broadcastReceiver, new IntentFilter(KEY_BROADCAST_RECEIVER_TICK));
+        setColorAndValues();
+        serviceConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                timerService = ((TimerService.MyBinder) iBinder).getService();
+            }
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+            }
+        };
+        Intent mIntent = new Intent(getContext(), TimerService.class);
+        getActivity().bindService(mIntent, serviceConnection, 0);
+        getContext().startService(mIntent);
+        super.onResume();
+    }
+
+    private String convertMlsToCorrectDateFormateString(long mls) {
+        SimpleDateFormat formatter = new SimpleDateFormat("mm:ss", Locale.UK);
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date(mls);
+        return formatter.format(date);
     }
 }

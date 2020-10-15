@@ -13,6 +13,20 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
+        <ProgressBar
+            android:id="@+id/pb_time_left"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tv_time_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:max="61000"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
+            />
+
         <TextView
             android:id="@+id/tv_time_left"
             android:layout_width="wrap_content"
@@ -20,8 +34,9 @@
             android:text="@string/time_left_00_00"
             android:textColor="@color/yellow"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="15dp"/>
+            app:layout_constraintStart_toStartOf="parent"/>
 
 
         <TextView
