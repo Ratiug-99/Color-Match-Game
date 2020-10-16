@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Color Match Game</string>
+    <string name="record">Рекорд: </string>
+    <string name="_0">0</string>
+    <string name="wrong">Неправильно: </string>
+    <string name="right">Правильно: </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="start_game">Почати гру!</string>
+    <string name="does_the_color_match_the_text">Чи відповідає колір тексту?</string>
+    <string name="yes">Так</string>
+    <string name="no">Ні</string>
+    <string name="time_left_00_00">Лишилось часу: \t</string>
+    <string name="new_record">Новий рекорд: </string>
+    <string name="your_score">Ваші очки: </string>
+    <string name="restart_game">Почати заново</string>
+    <string name="game_over">Кінець гри!</string>
+    <string name="settings">Налаштування</string>
+    <string name="select_count_numbers">Кількість кольорів</string>
+    <string name="theme">Тема</string>
+    <string name="language">Мова</string>
+    <string name="english">Англійська</string>
+    <string name="russian">Російська</string>
+    <string name="ukrainian">Українська</string>
+    <string name="vibration">Вібрація</string>
+
+
+
+    <string-array name="color_names">
+        <item>"Білий"</item>
+        <item>"Жовтий"</item>
+        <item>"Червоний"</item>
+        <item>"Зелений"</item>
+        <item>"Синій"</item>
+        <item>"Срібний"</item>
+        <item>"Сірий"</item>
+        <item>"Olive"</item>
+        <item>"Пурпурний"</item>
+        <item>"Maroon"</item>
+        <item>"Aqua"</item>
+        <item>"Салатовий"</item>
+        <item>"Teal"</item>
+        <item>"Fuchsia"</item>
+        <item>"Navy"</item>
+    </string-array>
+
+    <string-array name="count_colors_for_select">
+        <item>5</item>
+        <item>7</item>
+        <item>10</item>
+        <item>14</item>
+    </string-array>
+</resources>
