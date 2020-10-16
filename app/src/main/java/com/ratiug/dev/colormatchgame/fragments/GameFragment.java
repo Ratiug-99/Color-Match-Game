@@ -171,10 +171,7 @@ public class GameFragment extends Fragment {
         }
         if (wrongAnswer == 10) {
             GameOverFragment gameOverFragment = new GameOverFragment();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fl_container, gameOverFragment)
-                    .addToBackStack(null)
-                    .commit();
+            openFragment(gameOverFragment);
             if (vibrationStatus) {
                 makeVibration(gameOverVibration);
             }
@@ -221,26 +218,20 @@ public class GameFragment extends Fragment {
                     tvTimeLeft.setText(getContext().getText(R.string.time_left_00_00) + value);
                     pbTimeLeft.setProgress((int) timeLeft);
                 } else {
-                   if (vibrationStatus) {
-                       makeVibration(finishVibration);
-                   }
+                    if (vibrationStatus) {
+                        makeVibration(finishVibration);
+                    }
                     btnNo.setEnabled(false);
                     btnYes.setEnabled(false);
                     if (newRecord) {
                         NewRecordFragment recordFragment = new NewRecordFragment();
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fl_container, recordFragment)
-                                .addToBackStack(null)
-                                .commit();
+                        openFragment(recordFragment);
                     } else {
                         FinishGameFragment finishGameFragment = new FinishGameFragment();
                         Bundle args = new Bundle();
                         args.putInt(FinishGameFragment.KEY_SCORE, rightAnswer);
                         finishGameFragment.setArguments(args);
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fl_container, finishGameFragment)
-                                .addToBackStack(null)
-                                .commit();
+                        openFragment(finishGameFragment);
                     }
                 }
             }
@@ -263,12 +254,12 @@ public class GameFragment extends Fragment {
         super.onResume();
     }
 
-    private void makeVibration(int timeToVibration) {
-        if (Build.VERSION.SDK_INT >= 26) {
-            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(timeToVibration, 100));
-        } else {
-            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(100);
-        }
+
+    private void openFragment(Fragment fragment) {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fl_container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private String convertMlsToCorrectDateFormateString(long mls) {
@@ -276,6 +267,14 @@ public class GameFragment extends Fragment {
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date date = new Date(mls);
         return formatter.format(date);
+    }
+
+    private void makeVibration(int timeToVibration) {
+        if (Build.VERSION.SDK_INT >= 26) {
+            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(timeToVibration, 100));
+        } else {
+            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(100);
+        }
     }
 
     private void showRightWrongAnswerViews() {
