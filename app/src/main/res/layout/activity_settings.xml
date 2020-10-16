@@ -53,7 +53,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_count_numbers"
         app:layout_constraintBottom_toBottomOf="@id/tv_count_numbers"
-        android:entries="@array/count_colors_for_select"
         />
 
     <TextView
