@@ -7,6 +7,7 @@ public class SharedPreferencesHelper {
     public static final String APP_PREFERENCES_NAME = "APP_PREFERENCES_NAME";
     public static final String APP_PREFERENCES_RECORD = "APP_PREFERENCES_RECORD";
     public static final String APP_PREFERENCE_COUNT_COLORS = "APP_PREFERENCE_COUNT_COLORS";
+    public static final String APP_PREFERENCE_VIBRATION_STATUS = "APP_PREFERENCE_VIBRATION_STATUS";
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -28,9 +29,16 @@ public class SharedPreferencesHelper {
     public int getCountColors(){
         return mSharedPreferences.getInt(APP_PREFERENCE_COUNT_COLORS, 0);
     }
-
     public void setCountColors(int count){
         mEditor.putInt(APP_PREFERENCE_COUNT_COLORS,count);
+        mEditor.apply();
+    }
+
+    public boolean getVibrationStatus(){
+        return mSharedPreferences.getBoolean(APP_PREFERENCE_VIBRATION_STATUS,true);
+    }
+    public void setVibrationStatus(boolean status){
+        mEditor.putBoolean(APP_PREFERENCE_VIBRATION_STATUS,status);
         mEditor.apply();
     }
 }

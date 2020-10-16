@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +28,7 @@ import com.ratiug.dev.colormatchgame.TimerService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Random;
 import java.util.TimeZone;
 
@@ -53,12 +53,18 @@ public class GameFragment extends Fragment {
     TimerService timerService;
     ServiceConnection serviceConnection;
     BroadcastReceiver broadcastReceiver;
+    int selectedOptionsColor;
     private TextView tvNameRight, tvNameWrong, tvRightValue, tvWrongValue, tvRecordValue, tvColor1, tvTimeLeft;
     private Button btnYes, btnNo;
     private ProgressBar pbTimeLeft;
     private boolean differentValues = true;
     private boolean correctAnswer = false;
-    int selectedOptionsColor;
+    private boolean vibrationStatus;
+    ////
+    private int wrongVibration = 250;
+    private int gameOverVibration = 1000;
+    private int finishVibration = 750;
+    ///
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +81,7 @@ public class GameFragment extends Fragment {
         mSharedPreferencesHelper = new SharedPreferencesHelper(getContext());
         record = mSharedPreferencesHelper.getRecord();
         selectedOptionsColor = Integer.parseInt(countColorOptions[mSharedPreferencesHelper.getCountColors()]);
+        vibrationStatus = mSharedPreferencesHelper.getVibrationStatus();
 
         showRightWrongAnswerViews();
     }
@@ -122,12 +129,12 @@ public class GameFragment extends Fragment {
         boolean choice = rnd.nextBoolean();
         if (choice) {
             do {
-            int temp = rnd.nextInt(selectedOptionsColor);
+                int temp = rnd.nextInt(selectedOptionsColor);
                 differentValues = temp != oldColor1;
-            color1 = temp;
-            valueColor1 = temp;
-            oldColor1 = color1;
-            oldValueColor1 = valueColor1;
+                color1 = temp;
+                valueColor1 = temp;
+                oldColor1 = color1;
+                oldValueColor1 = valueColor1;
             } while (!differentValues);
         } else {
             do {
@@ -159,10 +166,8 @@ public class GameFragment extends Fragment {
 
     private void plusWrong() {
         wrongAnswer = wrongAnswer + 1;
-        if (Build.VERSION.SDK_INT >= 26) {
-            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(100, 100));
-        } else {
-            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(100);
+        if (vibrationStatus) {
+            makeVibration(wrongVibration);
         }
         if (wrongAnswer == 10) {
             GameOverFragment gameOverFragment = new GameOverFragment();
@@ -170,11 +175,8 @@ public class GameFragment extends Fragment {
                     .replace(R.id.fl_container, gameOverFragment)
                     .addToBackStack(null)
                     .commit();
-            long[] mice = {0, 400, 100, 500};
-            if (Build.VERSION.SDK_INT >= 26) {
-                ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createWaveform(mice, -1));
-            } else {
-                ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(400);
+            if (vibrationStatus) {
+                makeVibration(gameOverVibration);
             }
         }
         tvWrongValue.setText(valueOf(wrongAnswer));
@@ -211,17 +213,17 @@ public class GameFragment extends Fragment {
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                String value = convertMlsToCorrectDateFormateString(intent.getLongExtra(KEY_TIME_VALUE_LONG,0));
-                long timeLeft = intent.getLongExtra(KEY_TIME_VALUE_LONG,0);
-                if (!value.equals("Finish")) {
+                String value = convertMlsToCorrectDateFormateString(intent.getLongExtra(KEY_TIME_VALUE_LONG, 0));
+
+                Log.d(TAG, "onReceive: " + value);
+                long timeLeft = intent.getLongExtra(KEY_TIME_VALUE_LONG, 0);
+                if (!Objects.equals(intent.getStringExtra(KEY_TIME_VALUE_STRING), "Finish")) {
                     tvTimeLeft.setText(getContext().getText(R.string.time_left_00_00) + value);
                     pbTimeLeft.setProgress((int) timeLeft);
                 } else {
-                    if (Build.VERSION.SDK_INT >= 26) {
-                        ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(500,-1));
-                    } else {
-                        ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(200);
-                    }
+                   if (vibrationStatus) {
+                       makeVibration(finishVibration);
+                   }
                     btnNo.setEnabled(false);
                     btnYes.setEnabled(false);
                     if (newRecord) {
@@ -250,6 +252,7 @@ public class GameFragment extends Fragment {
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 timerService = ((TimerService.MyBinder) iBinder).getService();
             }
+
             @Override
             public void onServiceDisconnected(ComponentName componentName) {
             }
@@ -258,6 +261,14 @@ public class GameFragment extends Fragment {
         getActivity().bindService(mIntent, serviceConnection, 0);
         getContext().startService(mIntent);
         super.onResume();
+    }
+
+    private void makeVibration(int timeToVibration) {
+        if (Build.VERSION.SDK_INT >= 26) {
+            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(timeToVibration, 100));
+        } else {
+            ((Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE)).vibrate(100);
+        }
     }
 
     private String convertMlsToCorrectDateFormateString(long mls) {
@@ -273,6 +284,7 @@ public class GameFragment extends Fragment {
         tvRightValue.setVisibility(View.VISIBLE);
         tvWrongValue.setVisibility(View.VISIBLE);
     }
+
     private void hideRightWrongAnswerViews() {
         tvNameRight.setVisibility(View.GONE);
         tvNameWrong.setVisibility(View.GONE);
