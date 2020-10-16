@@ -49,7 +49,7 @@ public class GameFragment extends Fragment {
     Boolean newRecord = false;
     SharedPreferencesHelper mSharedPreferencesHelper;
     int[] colors;
-    String[] color_names;
+    String[] color_names, countColorOptions;
     TimerService timerService;
     ServiceConnection serviceConnection;
     BroadcastReceiver broadcastReceiver;
@@ -58,6 +58,7 @@ public class GameFragment extends Fragment {
     private ProgressBar pbTimeLeft;
     private boolean differentValues = true;
     private boolean correctAnswer = false;
+    int selectedOptionsColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,47 +68,27 @@ public class GameFragment extends Fragment {
         tvRightValue = getActivity().findViewById(R.id.tv_right_value);
         tvWrongValue = getActivity().findViewById(R.id.tv_wrong_value);
         tvRecordValue = getActivity().findViewById(R.id.tv_record_value);
-        Log.d(TAG, "onCreate: ");
+
         colors = getContext().getResources().getIntArray(R.array.colors);
         color_names = getContext().getResources().getStringArray(R.array.color_names);
+        countColorOptions = getContext().getResources().getStringArray(R.array.count_colors_for_select);
         mSharedPreferencesHelper = new SharedPreferencesHelper(getContext());
         record = mSharedPreferencesHelper.getRecord();
+        selectedOptionsColor = Integer.parseInt(countColorOptions[mSharedPreferencesHelper.getCountColors()]);
+
         showRightWrongAnswerViews();
     }
-
-    private void showRightWrongAnswerViews() {
-        tvNameRight.setVisibility(View.VISIBLE);
-        tvNameWrong.setVisibility(View.VISIBLE);
-        tvRightValue.setVisibility(View.VISIBLE);
-        tvWrongValue.setVisibility(View.VISIBLE);
-    }
-
-    private void hideRightWrongAnswerViews() {
-        tvNameRight.setVisibility(View.GONE);
-        tvNameWrong.setVisibility(View.GONE);
-        tvRightValue.setVisibility(View.GONE);
-        tvWrongValue.setVisibility(View.GONE);
-
-        rightAnswer = 0;
-        wrongAnswer = 0;
-
-        tvRightValue.setText(valueOf(rightAnswer));
-        tvWrongValue.setText(valueOf(wrongAnswer));
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
+
         tvColor1 = view.findViewById(R.id.tv_color_one);
         btnYes = view.findViewById(R.id.btnYes);
         btnNo = view.findViewById(R.id.btnNo);
         tvTimeLeft = view.findViewById(R.id.tv_time_left);
         pbTimeLeft = view.findViewById(R.id.pb_time_left);
-        //pbTimeLeft.setMax(61000);
-        pbTimeLeft.setProgress(50);
-        Log.d(TAG, "onCreateView: +");
 
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,13 +122,8 @@ public class GameFragment extends Fragment {
         boolean choice = rnd.nextBoolean();
         if (choice) {
             do {
-            int temp = rnd.nextInt(color_names.length);
-            if (temp != oldColor1){
-                differentValues = true;
-            }
-            else {
-                differentValues = false;
-            }
+            int temp = rnd.nextInt(selectedOptionsColor);
+                differentValues = temp != oldColor1;
             color1 = temp;
             valueColor1 = temp;
             oldColor1 = color1;
@@ -155,8 +131,8 @@ public class GameFragment extends Fragment {
             } while (!differentValues);
         } else {
             do {
-                color1 = rnd.nextInt(colors.length);
-                valueColor1 = rnd.nextInt(color_names.length);
+                color1 = rnd.nextInt(selectedOptionsColor);
+                valueColor1 = rnd.nextInt(selectedOptionsColor);
                 if (color1 != oldColor1 || valueColor1 != oldValueColor1) {
                     differentValues = true;
                     oldColor1 = color1;
@@ -289,5 +265,24 @@ public class GameFragment extends Fragment {
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date date = new Date(mls);
         return formatter.format(date);
+    }
+
+    private void showRightWrongAnswerViews() {
+        tvNameRight.setVisibility(View.VISIBLE);
+        tvNameWrong.setVisibility(View.VISIBLE);
+        tvRightValue.setVisibility(View.VISIBLE);
+        tvWrongValue.setVisibility(View.VISIBLE);
+    }
+    private void hideRightWrongAnswerViews() {
+        tvNameRight.setVisibility(View.GONE);
+        tvNameWrong.setVisibility(View.GONE);
+        tvRightValue.setVisibility(View.GONE);
+        tvWrongValue.setVisibility(View.GONE);
+
+        rightAnswer = 0;
+        wrongAnswer = 0;
+
+        tvRightValue.setText(valueOf(rightAnswer));
+        tvWrongValue.setText(valueOf(wrongAnswer));
     }
 }
