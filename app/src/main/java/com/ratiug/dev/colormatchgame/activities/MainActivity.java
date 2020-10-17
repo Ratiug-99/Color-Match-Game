@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -28,16 +29,18 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferencesHelper mSharedPreferencesHelper;
     boolean doubleBackToExitPressedOnce = false;
     private TextView tvRecordValue;
-
     //temp
     boolean startActivity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
-
+        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
+        String prefLanguage = mSharedPreferencesHelper.getLanguage().trim();
+        if (prefLanguage.equals("")){
+            mSharedPreferencesHelper.setLanguage(getResources().getConfiguration().locale.toString().substring(0,2));
+        }
         mSharedPreferencesHelper = new SharedPreferencesHelper(this);                  //
         Log.d(TAG, "onCreate: ");                                                      //
         Locale myLocale = new Locale(mSharedPreferencesHelper.getLanguage());          //
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         Configuration conf = res.getConfiguration();                                   //
         conf.locale = myLocale;                                                        //
         res.updateConfiguration(conf, dm);                                             //
+
 
         setContentView(R.layout.activity_main);
         openToStartFragment();
