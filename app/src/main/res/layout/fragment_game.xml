@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/colorBackground"
     tools:context=".fragments.GameFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:background="@color/colorBackground"
         android:orientation="vertical">
 
         <ProgressBar
@@ -32,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time_left_00_00"
-            android:textColor="@color/yellow"
+            android:textColor="@color/colorAccentText"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +46,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="80dp"
             android:text="@string/does_the_color_match_the_text"
-            android:textColor="@color/white"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/task_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             tools:text="Color 1"
-            android:textColor="@color/white"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/color_size_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

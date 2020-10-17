@@ -1,6 +1,8 @@
 package com.ratiug.dev.colormatchgame.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -15,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
@@ -22,9 +25,12 @@ import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity {
+    public static final String TAG = "DBG | SettingsActivity";
+
     Spinner spinnerCountColors;
     RadioButton rbEnglish, rbRussian, rbUkrainian;
     CheckBox cbVibrationStatus;
+    SwitchCompat switchTheme;
     SharedPreferencesHelper sharedPreferencesHelper;
     Integer selected_count_colors;
     Boolean vibrationStatus;
@@ -33,12 +39,24 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
         sharedPreferencesHelper = new SharedPreferencesHelper(this);
+        language = sharedPreferencesHelper.getLanguage();
+        super.onCreate(savedInstanceState);
+        Locale myLocale = new Locale(language);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        setContentView(R.layout.activity_settings);
+
         selected_count_colors = sharedPreferencesHelper.getCountColors();
         vibrationStatus = sharedPreferencesHelper.getVibrationStatus();
         cbVibrationStatus = findViewById(R.id.cb_vibration);
+
+
+
+
 
         rbEnglish = findViewById(R.id.rb_english);
         rbEnglish.setOnClickListener(radioButtonClickListener);
@@ -46,18 +64,27 @@ public class SettingsActivity extends AppCompatActivity {
         rbRussian.setOnClickListener(radioButtonClickListener);
         rbUkrainian = findViewById(R.id.rb_ukrainian);
         rbUkrainian.setOnClickListener(radioButtonClickListener);
-        language = sharedPreferencesHelper.getLanguage();
+
 
         setLanguageRB(language);
+       // setLocale(language);
+
+        switchTheme = findViewById(R.id.switch_theme);
+        int theme = sharedPreferencesHelper.getTheme();
+        if (theme == 1){
+            switchTheme.setChecked(true);
+        } else if (theme == 2){
+            switchTheme.setChecked(false);
+        }
 
         spinnerCountColors = findViewById(R.id.s_colors_count);
-        ArrayAdapter <?> adapter = ArrayAdapter.createFromResource(this,
-                R.array.count_colors_for_select,R.layout.support_simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this,
+                R.array.count_colors_for_select, R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         spinnerCountColors.setAdapter(adapter);
 
-       spinnerCountColors.setSelection(selected_count_colors);
-       cbVibrationStatus.setChecked(vibrationStatus);
+        spinnerCountColors.setSelection(selected_count_colors);
+        cbVibrationStatus.setChecked(vibrationStatus);
 
         spinnerCountColors.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -77,6 +104,22 @@ public class SettingsActivity extends AppCompatActivity {
                 sharedPreferencesHelper.setVibrationStatus(b);
             }
         });
+
+        switchTheme.setOnCheckedChangeListener(new SwitchCompat.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); //1
+                    sharedPreferencesHelper.setTheme(AppCompatDelegate.getDefaultNightMode());
+                    Log.d(TAG, "onCheckedChanged: " + AppCompatDelegate.getDefaultNightMode());
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES); //2
+                    sharedPreferencesHelper.setTheme(AppCompatDelegate.getDefaultNightMode());
+                    Log.d(TAG, "onCheckedChanged: " + AppCompatDelegate.getDefaultNightMode());
+                }
+            }
+        });
     }
 
     private void setLanguageRB(String language) {
@@ -84,15 +127,25 @@ public class SettingsActivity extends AppCompatActivity {
             language = Locale.getDefault().getLanguage();
         }
 
-        switch (language){
-            case "en":rbEnglish.setChecked(true); break;
-            case "ru":rbRussian.setChecked(true); break;
-            case "uk":rbUkrainian.setChecked(true); break;
+        switch (language) {
+            case "en":
+                rbEnglish.setChecked(true);
+                Log.d(TAG, "setLanguageRB: en+");
+                break;
+            case "ru":
+                rbRussian.setChecked(true);
+                Log.d(TAG, "setLanguageRB: ru+");
+                break;
+            case "uk":
+                rbUkrainian.setChecked(true);
+                Log.d(TAG, "setLanguageRB: uk+");
+                break;
         }
 
     }
 
     private void setLocale(String lang) {
+        Log.d(TAG, "setLocale: " + lang);
         Locale myLocale = new Locale(lang);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
@@ -108,13 +161,18 @@ public class SettingsActivity extends AppCompatActivity {
     View.OnClickListener radioButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            RadioButton rb = (RadioButton)view;
-            switch (rb.getId()){
-                case R.id.rb_english: setLocale("en"); ;
+            RadioButton rb = (RadioButton) view;
+            switch (rb.getId()) {
+                case R.id.rb_english:
+                    setLocale("en");
+                    ;
                     break;
-                case  R.id.rb_russian: setLocale("ru"); ;
+                case R.id.rb_russian:
+                    setLocale("ru");
+                    ;
                     break;
-                case R.id.rb_ukrainian: setLocale("uk");
+                case R.id.rb_ukrainian:
+                    setLocale("uk");
                     break;
             }
         }

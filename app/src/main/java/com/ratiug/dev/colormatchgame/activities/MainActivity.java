@@ -37,11 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         mSharedPreferencesHelper = new SharedPreferencesHelper(this);
+        AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
+
+
         String prefLanguage = mSharedPreferencesHelper.getLanguage().trim();
         if (prefLanguage.equals("")){
             mSharedPreferencesHelper.setLanguage(getResources().getConfiguration().locale.toString().substring(0,2));
         }
-        mSharedPreferencesHelper = new SharedPreferencesHelper(this);                  //
         Log.d(TAG, "onCreate: ");                                                      //
         Locale myLocale = new Locale(mSharedPreferencesHelper.getLanguage());          //
         Resources res = getResources();                                                //      apply language

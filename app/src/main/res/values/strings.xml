@@ -39,6 +39,20 @@
         <item>"Pink"</item>
     </string-array>
 
+    <string-array name="color_names_light">
+        <item>"Black"</item>
+        <item>"Yellow"</item>
+        <item>"Red"</item>
+        <item>"Green"</item>
+        <item>"Blue"</item>
+        <item>"Orange"</item>
+        <item>"Gray"</item>
+        <item>"Violet"</item>
+        <item>"Turquoise"</item>
+        <item>"Lime"</item>
+        <item>"Pink"</item>
+    </string-array>
+
     <string-array name="count_colors_for_select">
         <item>4</item>
         <item>6</item>
@@ -47,4 +61,6 @@
     </string-array>
     <string name="locl">0</string>
     <string name="many_mistakes">Many mistakes</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
 </resources>

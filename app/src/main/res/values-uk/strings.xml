@@ -40,6 +40,22 @@
         <item>"Рожевий"</item>
     </string-array>
 
+    <string-array name="color_names_light">
+        <item>"Чорний"</item>
+        <item>"Жовтий"</item>
+        <item>"Червоний"</item>
+        <item>"Зелений"</item>
+        <item>"Синій"</item>
+        <item>"Помаранчевий"</item>
+        <item>"Сірий"</item>
+        <item>"Фіолетовий"</item>
+        <item>"Бірюзовий"</item>
+        <item>"Салатовий"</item>
+        <item>"Рожевий"</item>
+    </string-array>
+
     <string name="locl">uk</string>
     <string name="many_mistakes">Багато помилок</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
 </resources>

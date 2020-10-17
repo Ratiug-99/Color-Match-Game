@@ -40,6 +40,22 @@
         <item>"Розовый"</item>
     </string-array>
 
+    <string-array name="color_names_light">
+        <item>"Черный"</item>
+        <item>"Желтый"</item>
+        <item>"Красный"</item>
+        <item>"Зеленый"</item>
+        <item>"Синий"</item>
+        <item>"Оранжевый"</item>
+        <item>"Серый"</item>
+        <item>"Фиолетовый"</item>
+        <item>"Бирюзовый"</item>
+        <item>"Салаовый"</item>
+        <item>"Розовый"</item>
+    </string-array>
+
     <string name="locl">ru</string>
     <string name="many_mistakes">Много ошибок</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
 </resources>

@@ -76,9 +76,15 @@ public class GameFragment extends Fragment {
         tvRecordValue = getActivity().findViewById(R.id.tv_record_value);
 
         colors = getContext().getResources().getIntArray(R.array.colors);
-        color_names = getContext().getResources().getStringArray(R.array.color_names);
-        countColorOptions = getContext().getResources().getStringArray(R.array.count_colors_for_select);
         mSharedPreferencesHelper = new SharedPreferencesHelper(getContext());
+        if (mSharedPreferencesHelper.getTheme() == 1){
+            color_names = getContext().getResources().getStringArray(R.array.color_names_light);
+        } else {
+            color_names = getContext().getResources().getStringArray(R.array.color_names);
+        }
+
+        countColorOptions = getContext().getResources().getStringArray(R.array.count_colors_for_select);
+
         record = mSharedPreferencesHelper.getRecord();
         selectedOptionsColor = Integer.parseInt(countColorOptions[mSharedPreferencesHelper.getCountColors()]);
         vibrationStatus = mSharedPreferencesHelper.getVibrationStatus();

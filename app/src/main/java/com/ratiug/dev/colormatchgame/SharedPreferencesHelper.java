@@ -9,6 +9,7 @@ public class SharedPreferencesHelper {
     public static final String APP_PREFERENCE_COUNT_COLORS = "APP_PREFERENCE_COUNT_COLORS";
     public static final String APP_PREFERENCE_VIBRATION_STATUS = "APP_PREFERENCE_VIBRATION_STATUS";
     public static final String APP_PREFERENCE_LANGUAGE  = "APP_PREFERENCE_LANGUAGE";
+    public static final String APP_PREFERENCE_THEME = "APP_PREFERENCE_THEME";
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -48,6 +49,14 @@ public class SharedPreferencesHelper {
     }
     public void setLanguage(String lang){
         mEditor.putString(APP_PREFERENCE_LANGUAGE,lang);
+        mEditor.apply();
+    }
+
+    public int getTheme(){
+        return mSharedPreferences.getInt(APP_PREFERENCE_THEME,1);
+    }
+    public void setTheme(int theme){
+        mEditor.putInt(APP_PREFERENCE_THEME,theme);
         mEditor.apply();
     }
 }

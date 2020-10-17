@@ -3,12 +3,12 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorBackground">@color/white</color>
-    <color name="textColor">@color/black</color>
-    <color name="colorAccentText">@color/blue</color>
+    <color name="colorBackground">@color/black</color>
+    <color name="textColor">@color/white</color>
+    <color name="colorAccentText">@color/yellow</color>
     /////////////////////////////////////////////////
     <color name="white">#FFFFFF</color>
-    <color name="yellow">#FFFF33</color>
+    <color name="yellow">#FFFF00</color>
     <color name="red">#FF0000</color>
     <color name="green">#008000</color>
     <color name="blue">#0000FF</color>
@@ -21,7 +21,7 @@
     <color name="black">#000000</color>
 
     <array name="colors">
-        <item>@color/black</item>
+        <item>@color/white</item>
         <item>@color/yellow</item>
         <item>@color/red</item>
         <item>@color/green</item>
