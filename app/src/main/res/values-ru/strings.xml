@@ -5,6 +5,7 @@
     <string name="wrong">Неправильно: </string>
     <string name="right">Правильно: </string>
     <!-- TODO: Remove or change this placeholder text -->
+
     <string name="start_game">Начать игру!</string>
     <string name="does_the_color_match_the_text">Соответсвует ли цвет тексту?</string>
     <string name="yes">Да</string>
@@ -49,4 +50,6 @@
         <item>10</item>
         <item>14</item>
     </string-array>
+    <string name="locl">ru</string>
+    <string name="many_mistakes">Много ошибок</string>
 </resources>
