@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
+        super.onCreate(savedInstanceState);
+
         mSharedPreferencesHelper = new SharedPreferencesHelper(this);                  //
         Log.d(TAG, "onCreate: ");                                                      //
         Locale myLocale = new Locale(mSharedPreferencesHelper.getLanguage());          //
@@ -43,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         Configuration conf = res.getConfiguration();                                   //
         conf.locale = myLocale;                                                        //
         res.updateConfiguration(conf, dm);                                             //
-
-        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
         openToStartFragment();

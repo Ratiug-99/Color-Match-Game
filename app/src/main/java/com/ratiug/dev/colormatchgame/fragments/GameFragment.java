@@ -278,22 +278,39 @@ public class GameFragment extends Fragment {
     }
 
     private void showRightWrongAnswerViews() {
+
+    if (tvNameRight!= null) {
         tvNameRight.setVisibility(View.VISIBLE);
+    }
+    if (tvNameWrong != null) {
         tvNameWrong.setVisibility(View.VISIBLE);
+    }
+    if (tvRightValue != null) {
         tvRightValue.setVisibility(View.VISIBLE);
+    }
+    if (tvWrongValue != null) {
         tvWrongValue.setVisibility(View.VISIBLE);
+    }
     }
 
     private void hideRightWrongAnswerViews() {
-        tvNameRight.setVisibility(View.GONE);
-        tvNameWrong.setVisibility(View.GONE);
-        tvRightValue.setVisibility(View.GONE);
-        tvWrongValue.setVisibility(View.GONE);
 
         rightAnswer = 0;
         wrongAnswer = 0;
 
-        tvRightValue.setText(valueOf(rightAnswer));
-        tvWrongValue.setText(valueOf(wrongAnswer));
+        if (tvNameRight!= null) {
+            tvNameRight.setVisibility(View.GONE);
+        }
+        if (tvNameWrong != null) {
+            tvNameWrong.setVisibility(View.GONE);
+        }
+        if (tvRightValue != null) {
+            tvRightValue.setVisibility(View.GONE);
+            tvRightValue.setText(valueOf(rightAnswer));
+        }
+        if (tvWrongValue != null) {
+            tvWrongValue.setVisibility(View.GONE);
+            tvWrongValue.setText(valueOf(wrongAnswer));
+        }
     }
 }

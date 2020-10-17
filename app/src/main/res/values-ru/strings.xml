@@ -32,24 +32,14 @@
         <item>"Красный"</item>
         <item>"Зеленый"</item>
         <item>"Синий"</item>
-        <item>"Серебряный"</item>
+        <item>"Оранжевый"</item>
         <item>"Серый"</item>
-        <item>"Olive"</item>
-        <item>"Пурпурный"</item>
-        <item>"Maroon"</item>
-        <item>"Aqua"</item>
+        <item>"Фиолетовый"</item>
+        <item>"Бирюзовый"</item>
         <item>"Салаовый"</item>
-        <item>"Teal"</item>
-        <item>"Fuchsia"</item>
-        <item>"Navy"</item>
+        <item>"Розовый"</item>
     </string-array>
 
-    <string-array name="count_colors_for_select">
-        <item>5</item>
-        <item>7</item>
-        <item>10</item>
-        <item>14</item>
-    </string-array>
     <string name="locl">ru</string>
     <string name="many_mistakes">Много ошибок</string>
 </resources>

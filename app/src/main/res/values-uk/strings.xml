@@ -32,24 +32,14 @@
         <item>"Червоний"</item>
         <item>"Зелений"</item>
         <item>"Синій"</item>
-        <item>"Срібний"</item>
+        <item>"Помаранчевий"</item>
         <item>"Сірий"</item>
-        <item>"Olive"</item>
-        <item>"Пурпурний"</item>
-        <item>"Maroon"</item>
-        <item>"Aqua"</item>
+        <item>"Фіолетовий"</item>
+        <item>"Бірюзовий"</item>
         <item>"Салатовий"</item>
-        <item>"Teal"</item>
-        <item>"Fuchsia"</item>
-        <item>"Navy"</item>
+        <item>"Рожевий"</item>
     </string-array>
 
-    <string-array name="count_colors_for_select">
-        <item>5</item>
-        <item>7</item>
-        <item>10</item>
-        <item>14</item>
-    </string-array>
     <string name="locl">uk</string>
     <string name="many_mistakes">Багато помилок</string>
 </resources>

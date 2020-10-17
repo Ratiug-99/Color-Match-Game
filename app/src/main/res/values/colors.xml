@@ -9,16 +9,12 @@
     <color name="red">#FF0000</color>
     <color name="green">#008000</color>
     <color name="blue">#0000FF</color>
-    <color name="silver">#C0C0C0</color>
+    <color name="orange">#FF8C00</color> //+
     <color name="gray">#808080</color>
-    <color name="olive">#808000</color>
-    <color name="purple">#800080</color>
-    <color name="maroon">#800000</color>
-    <color name="aqua">#00FFFF</color>
+    <color name="violet">#800080</color> //name
+    <color name="turquoise">#00FFFF</color> //name
     <color name="lime">#00FF00</color>
-    <color name="teal">#008080</color>
-    <color name="fuchsia">#FF00FF</color>
-    <color name="navy">#000080</color>
+    <color name="pink">#FF00FF</color>
     <color name="black">#000000</color>
 
     <array name="colors">
@@ -27,15 +23,11 @@
         <item>@color/red</item>
         <item>@color/green</item>
         <item>@color/blue</item>
-        <item>@color/silver</item>
+        <item>@color/orange</item>
         <item>@color/gray</item>
-        <item>@color/olive</item>
-        <item>@color/purple</item>
-        <item>@color/maroon</item>
-        <item>@color/aqua</item>
+        <item>@color/violet</item>
+        <item>@color/turquoise</item>
         <item>@color/lime</item>
-        <item>@color/teal</item>
-        <item>@color/fuchsia</item>
-        <item>@color/navy</item>
+        <item>@color/pink</item>
     </array>
 </resources>

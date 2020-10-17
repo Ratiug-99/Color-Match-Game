@@ -32,24 +32,15 @@
         <item>"Red"</item>
         <item>"Green"</item>
         <item>"Blue"</item>
-        <item>"Silver"</item>
+        <item>"Orange"</item>
         <item>"Gray"</item>
-        <item>"Olive"</item>
-        <item>"Purple"</item>
-        <item>"Maroon"</item>
-        <item>"Aqua"</item>
+        <item>"Violet"</item>
+        <item>"Turquoise"</item>
         <item>"Lime"</item>
-        <item>"Teal"</item>
-        <item>"Fuchsia"</item>
-        <item>"Navy"</item>
+        <item>"Pink"</item>
     </string-array>
 
-    <string-array name="count_colors_for_select">
-        <item>5</item>
-        <item>7</item>
-        <item>10</item>
-        <item>14</item>
-    </string-array>
+
     <string name="locl">en</string>
     <string name="many_mistakes">Many mistakes</string>
 </resources>
