@@ -56,6 +56,6 @@
 
     <string name="locl">ru</string>
     <string name="many_mistakes">Много ошибок</string>
-    <string name="dark">Dark</string>
-    <string name="light">Light</string>
+    <string name="dark">Темная</string>
+    <string name="light">Светлая</string>
 </resources>
