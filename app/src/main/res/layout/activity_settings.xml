@@ -195,6 +195,7 @@
         app:layout_constraintTop_toTopOf="@id/tv_vibration"
         app:layout_constraintBottom_toBottomOf="@id/tv_vibration"
         app:layout_constraintEnd_toEndOf="parent"
+        android:theme="@style/AppTheme"
         android:layout_margin="16dp"/>
 
 
