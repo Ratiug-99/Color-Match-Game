@@ -8,12 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.ratiug.dev.colormatchgame.R;
 
 
 public class GameOverFragment extends Fragment {
-    private Button btnRestart;
+    private LinearLayout btnRestart;
 
 
     @Override

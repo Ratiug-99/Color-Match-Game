@@ -69,11 +69,7 @@ public class GameFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tvNameRight = getActivity().findViewById(R.id.tv_name_right);
-        tvNameWrong = getActivity().findViewById(R.id.tv_name_wrong);
-        tvRightValue = getActivity().findViewById(R.id.tv_right_value);
-        tvWrongValue = getActivity().findViewById(R.id.tv_wrong_value);
-        tvRecordValue = getActivity().findViewById(R.id.tv_record_value);
+
 
         colors = getContext().getResources().getIntArray(R.array.colors);
         mSharedPreferencesHelper = new SharedPreferencesHelper(getContext());
@@ -89,7 +85,6 @@ public class GameFragment extends Fragment {
         selectedOptionsColor = Integer.parseInt(countColorOptions[mSharedPreferencesHelper.getCountColors()]);
         vibrationStatus = mSharedPreferencesHelper.getVibrationStatus();
 
-        showRightWrongAnswerViews();
     }
 
     @Override
@@ -97,6 +92,13 @@ public class GameFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
+        tvNameRight = view.findViewById(R.id.tv_name_right);
+        tvNameWrong = view.findViewById(R.id.tv_name_wrong);
+        tvRightValue = view.findViewById(R.id.tv_right_value);
+        tvWrongValue = view.findViewById(R.id.tv_wrong_value);
+        tvRecordValue = view.findViewById(R.id.tv_record_value);
+        record = mSharedPreferencesHelper.getRecord();
+        tvRecordValue.setText(String.valueOf(record));
         tvColor1 = view.findViewById(R.id.tv_color_one);
         btnYes = view.findViewById(R.id.btnYes);
         btnNo = view.findViewById(R.id.btnNo);
@@ -192,26 +194,17 @@ public class GameFragment extends Fragment {
         mSharedPreferencesHelper.setRecord(record);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        hideRightWrongAnswerViews();
-    }
-
 
     @Override
     public void onStop() {
         getActivity().unregisterReceiver(broadcastReceiver);
         getActivity().stopService(new Intent(getContext(), TimerService.class));
-        hideRightWrongAnswerViews();
         super.onStop();
     }
 
     @Override
     public void onResume() {
         Log.d(TAG, "onResume: ");
-        showRightWrongAnswerViews();
 
         broadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -283,40 +276,4 @@ public class GameFragment extends Fragment {
         }
     }
 
-    private void showRightWrongAnswerViews() {
-
-    if (tvNameRight!= null) {
-        tvNameRight.setVisibility(View.VISIBLE);
-    }
-    if (tvNameWrong != null) {
-        tvNameWrong.setVisibility(View.VISIBLE);
-    }
-    if (tvRightValue != null) {
-        tvRightValue.setVisibility(View.VISIBLE);
-    }
-    if (tvWrongValue != null) {
-        tvWrongValue.setVisibility(View.VISIBLE);
-    }
-    }
-
-    private void hideRightWrongAnswerViews() {
-
-        rightAnswer = 0;
-        wrongAnswer = 0;
-
-        if (tvNameRight!= null) {
-            tvNameRight.setVisibility(View.GONE);
-        }
-        if (tvNameWrong != null) {
-            tvNameWrong.setVisibility(View.GONE);
-        }
-        if (tvRightValue != null) {
-            tvRightValue.setVisibility(View.GONE);
-            tvRightValue.setText(valueOf(rightAnswer));
-        }
-        if (tvWrongValue != null) {
-            tvWrongValue.setVisibility(View.GONE);
-            tvWrongValue.setText(valueOf(wrongAnswer));
-        }
-    }
 }

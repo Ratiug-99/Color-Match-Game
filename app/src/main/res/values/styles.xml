@@ -21,4 +21,17 @@
 
     </style>
 
+    <style name="SCBSwitchLight" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/gray</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@color/textColor
+        </item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">@color/gray
+        </item>
+    </style>
+
 </resources>

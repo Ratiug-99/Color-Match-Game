@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".fragments.GameFragment">
+    tools:context=".fragments.GameFragment"
+    android:clickable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,6 +14,63 @@
         android:layout_gravity="center"
         android:background="@color/colorBackground"
         android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llc_topBar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="end"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_name_right"
+                style="@style/topBarItems"
+                android:layout_marginEnd="5dp"
+                android:text="@string/right"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/tv_right_value"
+                style="@style/topBarItems"
+                android:text="@string/_0"
+                android:textColor="@color/green"
+                android:layout_marginEnd="15dp" />
+
+            <TextView
+                android:id="@+id/tv_name_wrong"
+                style="@style/topBarItems"
+                android:layout_marginEnd="5dp"
+                android:text="@string/wrong"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:id="@+id/tv_wrong_value"
+                style="@style/topBarItems"
+                android:text="@string/_0"
+                android:textColor="@color/red"
+                android:layout_marginEnd="15dp" />
+
+            <TextView
+                style="@style/topBarItems"
+                android:layout_marginEnd="5dp"
+                android:text="@string/record"
+                android:textColor="@color/colorAccentText" />
+
+            <TextView
+                android:id="@+id/tv_record_value"
+                style="@style/topBarItems"
+                android:layout_marginEnd="15dp"
+                android:text="@string/_0"
+                android:textColor="@color/colorAccentText" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/textColor"
+            app:layout_constraintTop_toBottomOf="@id/llc_topBar"/>
 
         <ProgressBar
             android:id="@+id/pb_time_left"
@@ -23,9 +81,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:max="61000"
+            android:progressDrawable="@drawable/progress_bar_backgroud"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginTop="15dp"
+            tools:background="@color/black"
             />
 
         <TextView
@@ -34,7 +94,7 @@
             android:layout_height="wrap_content"
             android:text="@string/time_left_00_00"
             android:textColor="@color/colorAccentText"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llc_topBar"
             android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -44,13 +104,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="50dp"
             android:text="@string/does_the_color_match_the_text"
             android:textColor="@color/textColor"
             android:textSize="@dimen/task_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/pb_time_left" />
 
 
 
@@ -69,9 +129,10 @@
 
         <Button
             android:id="@+id/btnYes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:textSize="@dimen/buttons_answer_text_size"
+            android:background="@drawable/style_circle_button_green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="100dp"
@@ -80,9 +141,10 @@
 
         <Button
             android:id="@+id/btnNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:textSize="@dimen/buttons_answer_text_size"
+            android:background="@drawable/style_circle_button_red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="100dp"

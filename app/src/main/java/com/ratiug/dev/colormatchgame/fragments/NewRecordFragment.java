@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -16,7 +17,7 @@ import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 public class NewRecordFragment extends Fragment {
     SharedPreferencesHelper sharedPreferencesHelper;
     private TextView tvNewRecord;
-    private Button startGame;
+    private LinearLayout startGame;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

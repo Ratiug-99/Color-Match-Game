@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "DBG | MAIN ACTIVITY";
     SharedPreferencesHelper mSharedPreferencesHelper;
     boolean doubleBackToExitPressedOnce = false;
-    private TextView tvRecordValue;
     //temp
     boolean startActivity = false;
 
@@ -55,9 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         openToStartFragment();
-        tvRecordValue = findViewById(R.id.tv_record_value);
-        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
-        tvRecordValue.setText(valueOf(mSharedPreferencesHelper.getRecord()));
 
     }
 

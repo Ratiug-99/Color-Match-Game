@@ -2,8 +2,8 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="colorBackground">@color/white</color>
+    <color name="colorAccent">@color/black</color>
+    <color name="colorBackground">@drawable/background_white_theme</color>
     <color name="textColor">@color/black</color>
     <color name="colorAccentText">@color/blue</color>
     /////////////////////////////////////////////////
@@ -19,6 +19,9 @@
     <color name="lime">#00FF00</color>
     <color name="pink">#FF00FF</color>
     <color name="black">#000000</color>
+    //////////////////////////////////////////////////
+    <color name="grayForGradient">#C6C5C5</color>
+    <color name="darkRed">#8F0202</color>
 
     <array name="colors">
         <item>@color/black</item>

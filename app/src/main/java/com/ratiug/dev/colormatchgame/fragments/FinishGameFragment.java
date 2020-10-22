@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ratiug.dev.colormatchgame.R;
@@ -19,7 +20,7 @@ import static java.lang.String.valueOf;
 public class FinishGameFragment extends Fragment {
     public static final  String KEY_SCORE = "KEY_SCORE";
     private TextView tvScore, tvRecord;
-    private Button btnRestart;
+    private LinearLayout btnRestart;
     private SharedPreferencesHelper sharedPreferencesHelper;
 
     @Override
