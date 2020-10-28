@@ -6,6 +6,7 @@
     <color name="colorBackground">@drawable/background_white_theme</color>
     <color name="textColor">@color/black</color>
     <color name="colorAccentText">@color/blue</color>
+    <color name="colorBackgroundButtonGoogle">@color/white</color>
     /////////////////////////////////////////////////
     <color name="white">#FFFFFF</color>
     <color name="yellow">#FFFF33</color>
