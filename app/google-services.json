@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "162655197098",
+    "firebase_url": "https://color-match-game.firebaseio.com",
+    "project_id": "color-match-game",
+    "storage_bucket": "color-match-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162655197098:android:4ee27802d29fa5290f7dd3",
+        "android_client_info": {
+          "package_name": "com.ratiug.dev.colormatchgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162655197098-j0m4s92opaaupvk8c746dg220mfcuvii.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ratiug.dev.colormatchgame",
+            "certificate_hash": "7e45205dce29388047358adb43621794f5905ea5"
+          }
+        },
+        {
+          "client_id": "162655197098-irl7no4kn6a4rrrpkrgo3kqt484lkau6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANUkqR6RsFzuP2TCvKX4G-j-HSGtqWjbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162655197098-irl7no4kn6a4rrrpkrgo3kqt484lkau6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -63,5 +63,5 @@
     <string name="dark">Dark</string>
     <string name="light">Light</string>
     <string name="play">Play</string>
-    <string name="color_match">Color Match!</string>
+    <string name="color_match" translatable="false">Color Match!</string>
 </resources>
