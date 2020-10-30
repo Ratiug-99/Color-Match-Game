@@ -11,8 +11,8 @@
     <string name="yes">YES</string>
     <string name="no">No</string>
     <string name="time_left_00_00">Time left: \t</string>
-    <string name="new_record">New record:</string>
-    <string name="your_score">Your score:</string>
+    <string name="new_record">New record: </string>
+    <string name="your_score">Your score: </string>
     <string name="restart_game">Restart game</string>
     <string name="game_over">Game Over!</string>
     <string name="settings">Settings</string>
