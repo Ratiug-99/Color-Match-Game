@@ -37,10 +37,18 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setThemeApp();
+        mAuth = FirebaseAuth.getInstance();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
+        if (mSharedPreferencesHelper.getTokenId() != null){
+            firebaseAuthWithGoogle(mSharedPreferencesHelper.getTokenId());
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance();
         btnLogin = findViewById(R.id.btn_sign_in_google);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,24 +57,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
-
-
     }
 
     private void setThemeApp() {
-        Log.d(TAG, "setThemeApp: setAppTheme");
         mSharedPreferencesHelper = new SharedPreferencesHelper(this);
         AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
     }
 
     private void signIn() {
-        Log.d(TAG, "signIn");
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -92,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void firebaseAuthWithGoogle(String idToken) {
+    private void firebaseAuthWithGoogle(final String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -102,6 +100,8 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            mSharedPreferencesHelper.setTokenId(idToken);
+                            opemApp();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -111,5 +111,10 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+    }
+
+    private void opemApp() {
+        Intent intent = new Intent (this, MainActivity.class);
+        startActivity(intent);;
     }
 }
