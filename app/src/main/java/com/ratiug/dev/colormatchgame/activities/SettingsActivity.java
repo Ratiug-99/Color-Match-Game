@@ -20,12 +20,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
+import com.ratiug.dev.colormatchgame.User;
 
 import java.util.Locale;
 
@@ -34,6 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     Spinner spinnerCountColors;
     RadioButton rbEnglish, rbRussian, rbUkrainian;
+    ImageButton btnExit;
     CheckBox cbVibrationStatus;
     SwitchCompat switchTheme;
     SharedPreferencesHelper sharedPreferencesHelper;
@@ -125,6 +129,23 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnExit = findViewById(R.id.btn_exit);
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+    }
+
+    private void logout() {
+        sharedPreferencesHelper.setTokenId(null);
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signOut();
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 

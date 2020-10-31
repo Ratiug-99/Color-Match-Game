@@ -68,8 +68,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         int countFragment = getSupportFragmentManager().getBackStackEntryCount();
-        if (countFragment >= 3) {
+        if (countFragment == 2){
+            countFragment = getSupportFragmentManager().getBackStackEntryCount();
+            super.onBackPressed();
+        }
+        else if (countFragment >= 3) {
             while (countFragment != 2) {
                 countFragment = getSupportFragmentManager().getBackStackEntryCount();
                 super.onBackPressed();

@@ -198,5 +198,29 @@
         android:theme="@style/AppTheme"
         android:layout_margin="16dp"/>
 
+    <TextView
+        android:id="@+id/tv_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exit"
+        app:layout_constraintTop_toBottomOf="@id/tv_vibration"
+        android:textSize="18sp"
+        android:textColor="@color/textColor"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/btn_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tv_exit"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_exit"
+        app:layout_constraintTop_toTopOf="@id/tv_exit"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_logout"
+        app:tint="@color/colorAccent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
