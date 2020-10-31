@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -15,6 +16,7 @@ import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 
 public class WelcomeActivity extends AppCompatActivity {
     private SharedPreferencesHelper mSharedPreferencesHelper;
+    public static final String TAG = "DBG | SplashScreen ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private Runnable selectActivity() {
+        Log.d(TAG, "selectActivity: " + mSharedPreferencesHelper.getTokenId());
         if (mSharedPreferencesHelper.getTokenId() != null){
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);

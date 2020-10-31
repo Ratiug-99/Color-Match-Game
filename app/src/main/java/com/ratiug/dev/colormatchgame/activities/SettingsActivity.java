@@ -141,11 +141,12 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void logout() {
         sharedPreferencesHelper.setTokenId(null);
+        Log.d(TAG, "logout: " + sharedPreferencesHelper.getTokenId());
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signOut();
-        Intent intent = new Intent(this,LoginActivity.class);
+        Intent intent = new Intent (this, LoginActivity.class);
+       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
     }
 
 
