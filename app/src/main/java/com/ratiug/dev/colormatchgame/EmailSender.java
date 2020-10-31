@@ -1,3 +1,5 @@
+package com.ratiug.dev.colormatchgame;
+
 import android.util.Log;
 import android.widget.Toast;
 

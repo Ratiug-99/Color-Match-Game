@@ -42,9 +42,9 @@ public class LoginActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
-        if (mSharedPreferencesHelper.getTokenId() != null){
-            firebaseAuthWithGoogle(mSharedPreferencesHelper.getTokenId());
-        }
+//        if (mSharedPreferencesHelper.getTokenId() != null){
+//            firebaseAuthWithGoogle(mSharedPreferencesHelper.getTokenId());
+//        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             mSharedPreferencesHelper.setTokenId(idToken);
-                            openApp(idToken);
+                            openApp();
                         } else {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                         }
@@ -102,9 +102,9 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void openApp(String token) {
+    private void openApp() {
         Intent intent = new Intent (this, MainActivity.class);
-        intent.putExtra("Token",token);
         startActivity(intent);;
+        finish();
     }
 }

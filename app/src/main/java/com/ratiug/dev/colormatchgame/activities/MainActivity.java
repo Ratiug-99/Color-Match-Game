@@ -28,7 +28,6 @@ import static java.lang.String.valueOf;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "DBG | MAIN ACTIVITY";
-    public  FirebaseUser user;
     SharedPreferencesHelper mSharedPreferencesHelper;
     boolean doubleBackToExitPressedOnce = false;
     boolean startActivity = false;
@@ -53,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
         conf.locale = myLocale;                                                        //
         res.updateConfiguration(conf, dm);                                             //
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        Toast.makeText(this, user.getDisplayName(), Toast.LENGTH_SHORT).show();
         setContentView(R.layout.activity_main);
         openToStartFragment();
 
