@@ -62,7 +62,7 @@ public class SharedPreferencesHelper {
     }
 
     public String getTokenId() {
-        return mSharedPreferences.getString(APP_PREFERENCE_TOKEN_USER_ID, "");
+        return mSharedPreferences.getString(APP_PREFERENCE_TOKEN_USER_ID, null);
     }
     public void setTokenId(String tokenIdUser) {
         mEditor.putString(APP_PREFERENCE_TOKEN_USER_ID, tokenIdUser);

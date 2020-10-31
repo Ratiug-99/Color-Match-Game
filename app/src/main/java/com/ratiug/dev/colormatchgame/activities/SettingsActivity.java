@@ -1,5 +1,6 @@
 package com.ratiug.dev.colormatchgame.activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
@@ -7,10 +8,14 @@ import androidx.appcompat.widget.SwitchCompat;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -121,6 +126,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void setLanguageRB(String language) {
         if (language.equals("")) {
