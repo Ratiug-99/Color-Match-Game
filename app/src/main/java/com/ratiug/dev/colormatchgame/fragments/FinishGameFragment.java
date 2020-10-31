@@ -17,6 +17,7 @@ import com.github.tntkhang.gmailsenderlibrary.GMailSender;
 import com.github.tntkhang.gmailsenderlibrary.GmailListener;
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
+import com.ratiug.dev.colormatchgame.User;
 import com.ratiug.dev.colormatchgame.activities.MainActivity;
 
 import static java.lang.String.valueOf;
@@ -27,10 +28,12 @@ public class FinishGameFragment extends Fragment {
     private TextView tvScore, tvRecord;
     private LinearLayout btnRestart;
     private SharedPreferencesHelper sharedPreferencesHelper;
+    User user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user = new User();
 
     }
 
@@ -50,29 +53,9 @@ public class FinishGameFragment extends Fragment {
                 restartGame();
             }
         });
-        sendEmail(); //test fun
         return  v;
     }
 
-    private void sendEmail() {
-        GMailSender.withAccount("color.match.game.feedback@gmail.com", "ratiugroot11")
-                .withTitle("Your score!")
-                .withBody(tvScore.getText() + ". Not bad - not bad")
-                .withSender("Color")
-                .toEmailAddress("evgeniy.basiuk@gmail.com") // one or multiple addresses separated by a comma
-                .withListenner(new GmailListener() {
-                    @Override
-                    public void sendSuccess() {
-                        Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void sendFail(String err) {
-                        Log.d("DBG | FINISHGAME ", "sendFail: " +  "Fail: " + err);
-                    }
-                })
-                .send();
-    }
 
     private void restartGame() {
         GameFragment game = new GameFragment();
