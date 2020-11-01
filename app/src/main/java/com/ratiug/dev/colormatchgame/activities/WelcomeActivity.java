@@ -2,22 +2,20 @@ package com.ratiug.dev.colormatchgame.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Window;
 import android.view.WindowManager;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
+import com.ratiug.dev.colormatchgame.UserDao;
 
 public class WelcomeActivity extends AppCompatActivity {
     private SharedPreferencesHelper mSharedPreferencesHelper;
+    UserDao userDao = new UserDao();
     public static final String TAG = "DBG | SplashScreen ";
 
     @Override
@@ -40,10 +38,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
     }
 
-    private Runnable selectActivity() {
+    private void selectActivity() {
         Log.d(TAG, "selectActivity: " + mSharedPreferencesHelper.getTokenId());
         if (mSharedPreferencesHelper.getTokenId() != null){
             Intent intent = new Intent(this,MainActivity.class);
+            userDao.updateUserInfo(this);
             startActivity(intent);
             finish();
         }
@@ -52,6 +51,5 @@ public class WelcomeActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        return null;
     }
 }

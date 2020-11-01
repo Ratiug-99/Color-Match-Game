@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
     private void setThemeApp() {
         mSharedPreferencesHelper = new SharedPreferencesHelper(this);
         AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
+        mSharedPreferencesHelper.setRecord(0);
     }
 
     private void signIn() {
