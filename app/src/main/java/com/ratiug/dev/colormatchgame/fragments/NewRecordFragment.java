@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,11 +12,13 @@ import androidx.fragment.app.Fragment;
 
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
+import com.ratiug.dev.colormatchgame.UserDao;
 
 public class NewRecordFragment extends Fragment {
     SharedPreferencesHelper sharedPreferencesHelper;
     private TextView tvNewRecord;
     private LinearLayout startGame;
+    private UserDao userDao = new UserDao();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,9 @@ public class NewRecordFragment extends Fragment {
 
         tvNewRecord = v.findViewById(R.id.tv_new_record);
         tvNewRecord.setText(getContext().getResources().getString(R.string.new_record) + sharedPreferencesHelper.getRecord());
+
+       userDao.updateUserInfo(getContext());
+
         startGame = v.findViewById(R.id.startGame);
         showButtonNewGame();
 

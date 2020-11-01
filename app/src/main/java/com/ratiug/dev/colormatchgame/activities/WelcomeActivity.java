@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 

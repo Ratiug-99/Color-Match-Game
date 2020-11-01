@@ -22,8 +22,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
+import com.ratiug.dev.colormatchgame.User;
+import com.ratiug.dev.colormatchgame.UserDao;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "DBG | LoginActivity";
@@ -32,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
+    private UserDao userDao = new UserDao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            userDao.updateUserInfo(LoginActivity.this);
                             mSharedPreferencesHelper.setTokenId(idToken);
                             openApp();
                         } else {
@@ -100,6 +110,22 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+//    private void saveUserToDatabase(String name, String email) {
+//        String  ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        String mName = name;
+//        String mEmail = email;
+//
+//        User newUser = new User(mEmail,mName, mSharedPreferencesHelper.getRecord());
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference users = database.getReference("Users:");
+//        users.child(ID).setValue(newUser);
+//    }
+
+    private boolean isUserNotFoundAtBD(String id) {
+
+        return false;
     }
 
     private void openApp() {
