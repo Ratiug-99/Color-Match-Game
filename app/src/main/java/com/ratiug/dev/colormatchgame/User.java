@@ -1,24 +1,51 @@
 package com.ratiug.dev.colormatchgame;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
+public class User{
 
     public String email;
     public String name;
-    public int record;
+    public String record;
+    public String uri;
+
+    public User(String email, String name, String record, String uriImage) {
+        this.email = email;
+        this.name = name;
+        this.record = record;
+        this.uri = uriImage;
+    }
 
     public User() {
     }
 
-    public User(String mEmail, String mName) {
-        this.email = mEmail;
-        this.name = mName;
+    public String getEmail() {
+        return email;
     }
 
-    public User(String email, String name, int record) {
+    public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRecord() {
+        return record;
+    }
+
+    public void setRecord(String record) {
         this.record = record;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

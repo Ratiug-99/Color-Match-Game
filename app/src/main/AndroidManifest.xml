@@ -13,24 +13,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".activities.WelcomeActivity" android:theme="@style/SplashTheme">
+        <activity android:name=".activities.RatingActivity"></activity>
+        <activity
+            android:name=".activities.WelcomeActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.LoginActivity">
-        </activity>
+        <activity android:name=".activities.LoginActivity"></activity>
         <activity
             android:name=".activities.SettingsActivity"
             android:screenOrientation="portrait" />
+
         <service android:name=".TimerService" />
 
         <activity
             android:name=".activities.MainActivity"
             android:configChanges="locale|orientation"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

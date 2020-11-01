@@ -19,10 +19,11 @@ public class UserDao extends User {
         String  ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String mName = firebaseUser.getDisplayName();
         String mEmail = firebaseUser.getEmail();
+        String mUri = firebaseUser.getPhotoUrl().toString();
 
 
 
-        User newUser = new User(mEmail,mName, mSharedPreferencesHelper.getRecord());
+        User newUser = new User(mEmail,mName,String.valueOf(mSharedPreferencesHelper.getRecord()),mUri);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference users = database.getReference("Users:");
         users.child(ID).setValue(newUser);

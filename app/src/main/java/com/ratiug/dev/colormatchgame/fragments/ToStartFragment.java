@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
+import com.ratiug.dev.colormatchgame.activities.RatingActivity;
 import com.ratiug.dev.colormatchgame.activities.SettingsActivity;
 
 public class ToStartFragment extends Fragment {
@@ -20,6 +21,7 @@ public class ToStartFragment extends Fragment {
     private LinearLayout btnSettings;
     private LinearLayout  btnStartGame;
     private TextView tvRecordValue;
+    private Button btnRating;
 
     private SharedPreferencesHelper mSharedPreferenceHelper;
 
@@ -37,6 +39,7 @@ public class ToStartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_to_start, container, false);
         btnStartGame = view.findViewById(R.id.btn_start_game);
         btnSettings = view.findViewById(R.id.btn_settings);
+        btnRating = view.findViewById(R.id.btnRating);
         tvRecordValue = view.findViewById(R.id.tv_record_value);
 
         tvRecordValue.setText(String.valueOf(mSharedPreferenceHelper.getRecord()));
@@ -53,7 +56,20 @@ public class ToStartFragment extends Fragment {
                 openSettings();
             }
         });
+
+        btnRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRating();
+            }
+        });
+
         return view;
+    }
+
+    private void openRating() {
+        Intent intent = new Intent(getActivity(), RatingActivity.class);
+        startActivity(intent);
     }
 
     private void openSettings() {
