@@ -44,6 +44,7 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
         holder.name.setText(profiles.get(position).getName());
         holder.record.setText(profiles.get(position).getRecord());
         holder.profilePic.setImageURI(Uri.parse(profiles.get(position).getUri()));
+        holder.ratingPos.setText(String.valueOf(position + 1));
         Glide.with(holder.profilePic.getContext())
                 .load(Uri.parse(profiles.get(position).getUri()))
                 .into(holder.profilePic);
@@ -56,7 +57,7 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name, record;
+        TextView name, record, ratingPos;
         CircleImageView profilePic;
 
         public MyViewHolder(View itemView) {
@@ -65,6 +66,7 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
             name = itemView.findViewById(R.id.tvUsername);
             record = itemView.findViewById(R.id.tv_record);
             profilePic = itemView.findViewById(R.id.ivAvatar);
+            ratingPos = itemView.findViewById(R.id.tv_rating_no);
         }
     }
 }

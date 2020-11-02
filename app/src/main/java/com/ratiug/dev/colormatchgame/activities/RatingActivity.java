@@ -19,6 +19,9 @@ import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class RatingActivity extends AppCompatActivity{
@@ -40,12 +43,21 @@ public class RatingActivity extends AppCompatActivity{
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
                     User p = dataSnapshot1.getValue(User.class);
                     list.add(p);
                     Log.d(TAG, "onDataChange: " + list.size());
                 }
+                 Collections.sort(list, new Comparator<User>() {
+                     @Override
+                     public int compare(User user, User t1) {
+                         return Integer.parseInt(user.getRecord()) -
+                                 Integer.parseInt((t1.getRecord()));
+                     }
+                 });
+                Collections.reverse(list );
                 adapter = new AdapterRating(getApplicationContext(),list);
                 recyclerView.setAdapter(adapter);
             }

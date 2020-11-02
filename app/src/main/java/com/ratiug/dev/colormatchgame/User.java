@@ -48,4 +48,5 @@ public class User{
     public void setUri(String uri) {
         this.uri = uri;
     }
+
 }
