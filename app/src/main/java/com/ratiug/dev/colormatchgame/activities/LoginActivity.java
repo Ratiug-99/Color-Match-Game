@@ -46,19 +46,15 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setThemeApp();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
-//        if (mSharedPreferencesHelper.getTokenId() != null){
-//            firebaseAuthWithGoogle(mSharedPreferencesHelper.getTokenId());
-//        }
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
         btnLogin = findViewById(R.id.btn_sign_in_google);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,10 +67,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void setThemeApp() {
-        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
-        AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
-    }
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();

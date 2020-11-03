@@ -1,6 +1,7 @@
 package com.ratiug.dev.colormatchgame.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Build;
@@ -20,7 +21,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setThemeApp();
         super.onCreate(savedInstanceState);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                     WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -51,5 +54,10 @@ public class WelcomeActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    private void setThemeApp() {
+        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
+        AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
     }
 }

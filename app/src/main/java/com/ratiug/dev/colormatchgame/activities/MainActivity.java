@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         mSharedPreferencesHelper = new SharedPreferencesHelper(this);
-        AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
+//        AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
 
         String prefLanguage = mSharedPreferencesHelper.getLanguage().trim();
         if (prefLanguage.equals("")){
