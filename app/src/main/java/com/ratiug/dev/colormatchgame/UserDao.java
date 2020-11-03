@@ -16,6 +16,7 @@ public class UserDao extends User {
         mSharedPreferencesHelper = new SharedPreferencesHelper(context);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+
         String  ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String mName = firebaseUser.getDisplayName();
         String mEmail = firebaseUser.getEmail();
@@ -23,7 +24,7 @@ public class UserDao extends User {
 
 
 
-        User newUser = new User(mEmail,mName,String.valueOf(mSharedPreferencesHelper.getRecord()),mUri);
+        User newUser = new User(ID,mEmail,mName,String.valueOf(mSharedPreferencesHelper.getRecord()),mUri);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference users = database.getReference("Users:");
         users.child(ID).setValue(newUser);

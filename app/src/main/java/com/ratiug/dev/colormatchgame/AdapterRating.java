@@ -41,6 +41,7 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: ");
+
         holder.name.setText(profiles.get(position).getName());
         holder.record.setText(profiles.get(position).getRecord());
         holder.profilePic.setImageURI(Uri.parse(profiles.get(position).getUri()));

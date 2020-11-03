@@ -2,19 +2,29 @@ package com.ratiug.dev.colormatchgame;
 
 public class User{
 
+    public String uid;
     public String email;
     public String name;
     public String record;
     public String uri;
 
-    public User(String email, String name, String record, String uriImage) {
+    public User() {
+    }
+
+    public User(String uid, String email, String name, String record, String uri) {
+        this.uid = uid;
         this.email = email;
         this.name = name;
         this.record = record;
-        this.uri = uriImage;
+        this.uri = uri;
     }
 
-    public User() {
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getEmail() {
@@ -48,5 +58,4 @@ public class User{
     public void setUri(String uri) {
         this.uri = uri;
     }
-
 }

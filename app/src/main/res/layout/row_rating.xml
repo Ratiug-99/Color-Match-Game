@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="2dp"
-    app:cardElevation="1dp"
-    app:cardUseCompatPadding="true">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
+        android:background="@color/colorBackgroundCardView"
+        android:padding="3dp">
         <TextView
             android:id="@+id/tv_rating_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="№5"
+            android:textColor="@color/textColor"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +30,7 @@
             android:layout_marginStart="10dp"
             tools:src="@mipmap/ic_launcher"
             app:civ_border_width="1dp"
-            app:civ_border_color="@color/colorBackground"
+            app:civ_border_color="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_rating_no"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,6 +42,8 @@
             android:layout_marginStart="30dp"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@color/textColor"
+
             app:layout_constraintStart_toEndOf="@id/ivAvatar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -50,6 +53,8 @@
             android:id="@+id/tv_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvUsername"
             app:layout_constraintBottom_toBottomOf="@id/tvUsername"
