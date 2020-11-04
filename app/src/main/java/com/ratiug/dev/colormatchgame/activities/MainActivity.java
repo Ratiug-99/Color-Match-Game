@@ -1,32 +1,20 @@
 package com.ratiug.dev.colormatchgame.activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 import com.ratiug.dev.colormatchgame.fragments.ToStartFragment;
 
 import java.util.Locale;
-
-import static java.lang.String.valueOf;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "DBG | MAIN ACTIVITY";
@@ -36,26 +24,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
-//        AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
 
-        String prefLanguage = mSharedPreferencesHelper.getLanguage().trim();
-        if (prefLanguage.equals("")){
-            mSharedPreferencesHelper.setLanguage(getResources().getConfiguration().locale.toString().substring(0,2));
-        }
-        Log.d(TAG, "onCreate: ");                                                      //
-        Locale myLocale = new Locale(mSharedPreferencesHelper.getLanguage());          //
-        Resources res = getResources();                                                //      apply language
-        DisplayMetrics dm = res.getDisplayMetrics();                                   //
-        Configuration conf = res.getConfiguration();                                   //
-        conf.locale = myLocale;                                                        //
-        res.updateConfiguration(conf, dm);                                             //
+        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
 
         setContentView(R.layout.activity_main);
         openToStartFragment();
-
     }
 
     private void openToStartFragment() {
@@ -68,13 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         int countFragment = getSupportFragmentManager().getBackStackEntryCount();
-        if (countFragment == 2){
-            countFragment = getSupportFragmentManager().getBackStackEntryCount();
+        if (countFragment == 2) {
             super.onBackPressed();
-        }
-        else if (countFragment >= 3) {
+        } else if (countFragment >= 3) {
             while (countFragment != 2) {
                 countFragment = getSupportFragmentManager().getBackStackEntryCount();
                 super.onBackPressed();
@@ -85,10 +56,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show(); //todo set string value
 
             new Handler().postDelayed(new Runnable() {
-
                 @Override
                 public void run() {
                     doubleBackToExitPressedOnce = false;
@@ -101,34 +71,27 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        setLocale(this);
         if (startActivity) {
-            Log.d(TAG, "onResume: +");
-            setLocale(this);
             recreate();
         } else {
-            Log.d(TAG, "onResume: -");
             startActivity = true;
         }
         super.onResume();
     }
 
-    public  void setLocale(Activity context) {
-        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
+    public void setLocale(Activity context) {
         Configuration conf = getBaseContext().getResources().getConfiguration();
         String prefLanguage = mSharedPreferencesHelper.getLanguage().trim();
-        String currentLanguage = getResources().getConfiguration().locale.toString();
-        Log.d(TAG, "setLocale: " + prefLanguage + currentLanguage);
-        if (!"".equals(prefLanguage) && !conf.locale.getLanguage().equals(prefLanguage)) {
-            Log.d(TAG, "setLocale: +");
-        Locale locale;
-        locale = new Locale(mSharedPreferencesHelper.getLanguage());
-        Configuration config = new Configuration(context.getResources().getConfiguration());
-        Locale.setDefault(locale);
-        config.setLocale(locale);
 
-        context.getBaseContext().getResources().updateConfiguration(config,
-                context.getBaseContext().getResources().getDisplayMetrics());
-        recreate();
+        if (!"".equals(prefLanguage) && !conf.locale.getLanguage().equals(prefLanguage)) {
+            Locale locale;
+            locale = new Locale(mSharedPreferencesHelper.getLanguage());
+            Configuration config = new Configuration(context.getResources().getConfiguration());
+            Locale.setDefault(locale);
+            config.setLocale(locale);
+            context.getBaseContext().getResources().updateConfiguration(config,
+                    context.getBaseContext().getResources().getDisplayMetrics());
         }
     }
 }
