@@ -63,4 +63,5 @@
     <string name="chek_internet_connection">Перевірте інтернет з`єднання</string>
     <string name="rating">Рейтинг</string>
     <string name="congratulations">Вітаємо!</string>
+    <string name="press_back_again">Натисніть назад ще раз, що б вийти</string>
 </resources>
