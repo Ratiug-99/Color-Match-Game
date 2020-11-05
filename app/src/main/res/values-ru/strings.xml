@@ -59,4 +59,8 @@
     <string name="dark">Темная</string>
     <string name="light">Светлая</string>
     <string name="play">Играть</string>
+    <string name="exit">Выйти</string>
+    <string name="chek_internet_connection">Проверьте интернет соединение</string>
+    <string name="rating">Рейтинг</string>
+    <string name="congratulations">Поздравляем!</string>
 </resources>

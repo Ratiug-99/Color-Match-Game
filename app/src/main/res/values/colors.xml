@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">@color/black</color>
-    <color name="colorBackground">@drawable/background_white_theme</color>
+    <color name="colorActiveElement">@color/black</color>
+    <color name="colorBackground" tools:ignore="ReferenceType">@drawable/background_white_theme</color>
     <color name="colorBackgroundCardView">#f2f2f2</color>
     <color name="colorBackgroundCardViewMyPos">#a6a6a6</color>
     <color name="textColor">@color/black</color>

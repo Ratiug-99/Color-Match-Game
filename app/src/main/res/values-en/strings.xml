@@ -60,4 +60,8 @@
     <string name="dark">Dark</string>
     <string name="light">Light</string>
     <string name="play">Play</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="exit">Exit</string>
+    <string name="chek_internet_connection">Check internet connection</string>
+    <string name="rating">Rating</string>
 </resources>

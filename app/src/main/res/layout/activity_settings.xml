@@ -153,7 +153,7 @@
            android:layout_gravity="center"
             android:layout_margin="16dp"
             android:textColor="@color/textColor"
-            android:buttonTint="@color/textColor"
+            android:buttonTint="@color/colorActiveElement"
             android:text="@string/english"/>
 
         <RadioButton
@@ -163,7 +163,7 @@
             android:layout_gravity="center"
             android:layout_margin="16dp"
             android:textColor="@color/textColor"
-            android:buttonTint="@color/textColor"
+            android:buttonTint="@color/colorActiveElement"
             android:text="@string/russian"/>
 
         <RadioButton
@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/textColor"
-            android:buttonTint="@color/textColor"
+            android:buttonTint="@color/colorActiveElement"
             android:text="@string/ukrainian"
             android:layout_margin="16dp"/>
     </RadioGroup>
@@ -220,7 +220,7 @@
         app:layout_constraintTop_toTopOf="@id/tv_exit"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_logout"
-        app:tint="@color/colorAccent" />
+        app:tint="@color/colorActiveElement" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

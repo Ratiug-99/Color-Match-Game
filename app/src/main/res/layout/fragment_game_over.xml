@@ -47,7 +47,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/ic_replay"
-            app:tint="@color/colorAccent"
+            app:tint="@color/colorActiveElement"
             android:layout_gravity="center"/>
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/restart_game"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorActiveElement"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>

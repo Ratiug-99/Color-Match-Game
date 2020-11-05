@@ -3,6 +3,7 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">@color/white</color>
+    <color name="colorActiveElement">@color/white</color>
     <color name="colorBackground">#12151A</color>
     <color name="colorBackgroundCardView">#191c21</color>
     <color name="colorBackgroundCardViewMyPos">#111316</color>

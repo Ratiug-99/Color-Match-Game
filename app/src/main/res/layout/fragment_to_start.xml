@@ -33,14 +33,14 @@
             android:layout_height="120dp"
             android:src="@drawable/ic_play"
 
-            app:tint="@color/colorAccent" />
+            app:tint="@color/colorActiveElement" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/play"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorActiveElement"
             android:textSize="40sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -87,14 +87,14 @@
             android:layout_height="60dp"
             android:src="@drawable/ic_settings"
             android:layout_gravity="center"
-            app:tint="@color/colorAccent" />
+            app:tint="@color/colorActiveElement" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/settings"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorActiveElement"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
