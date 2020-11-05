@@ -21,21 +21,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
         setThemeApp();
-
-        String prefLanguage = mSharedPreferencesHelper.getLanguage().trim(); //todo create method (check on first load language and set it to SP)
-        if (prefLanguage.equals("")) {
-            mSharedPreferencesHelper.setLanguage(getResources().getConfiguration().locale.toString().substring(0, 2));
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //todo create method
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
-
+        checkLocale();
+        setFullScreen();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -46,8 +37,10 @@ public class WelcomeActivity extends AppCompatActivity {
 
     }
 
+
+
+
     private void selectActivity() {
-        Log.d(TAG, "selectActivity: " + mSharedPreferencesHelper.getTokenId());
         if (mSharedPreferencesHelper.getTokenId() != null) {
             userDao.updateUserInfo(this);
             Intent intent = new Intent(this, MainActivity.class);
@@ -60,7 +53,20 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void setThemeApp() {
-        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
         AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
+    }
+
+    private void checkLocale() {
+        String prefLanguage = mSharedPreferencesHelper.getLanguage().trim(); // check on first load language and set it to SP
+        if (prefLanguage.equals("")) {
+            mSharedPreferencesHelper.setLanguage(getResources().getConfiguration().locale.toString().substring(0, 2));
+        }
+    }
+
+    private void setFullScreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
     }
 }

@@ -4,7 +4,6 @@
     <string name="_0">0</string>
     <string name="wrong">Wrong:</string>
     <string name="right">Right:</string>
-    <!-- TODO: Remove or change this placeholder text -->
 
     <string name="start_game">Start game!</string>
     <string name="does_the_color_match_the_text">Does the color match the text?</string>

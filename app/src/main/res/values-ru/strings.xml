@@ -4,8 +4,6 @@
     <string name="_0">0</string>
     <string name="wrong">Неправильно: </string>
     <string name="right">Правильно: </string>
-    <!-- TODO: Remove or change this placeholder text -->
-
     <string name="start_game">Начать игру!</string>
     <string name="does_the_color_match_the_text">Соответсвует ли цвет тексту?</string>
     <string name="yes">Да</string>
