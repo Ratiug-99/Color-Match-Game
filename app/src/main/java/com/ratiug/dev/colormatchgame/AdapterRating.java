@@ -1,17 +1,16 @@
 package com.ratiug.dev.colormatchgame;
+
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.bumptech.glide.Glide;
-import com.ratiug.dev.colormatchgame.activities.RatingActivity;
 
 import java.util.ArrayList;
 
@@ -26,7 +25,6 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
     ArrayList<User> profiles;
 
     public AdapterRating(Context c, ArrayList<User> p) {
-        Log.d(TAG, "AdapterRating: ");
         context = c;
         profiles = p;
     }
@@ -34,14 +32,11 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d(TAG, "onCreateViewHolder: ");
         return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_rating, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: ");
-
         holder.name.setText(profiles.get(position).getName());
         holder.record.setText(profiles.get(position).getRecord());
         holder.profilePic.setImageURI(Uri.parse(profiles.get(position).getUri()));
@@ -53,7 +48,6 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: " + profiles.size());
         return profiles.size();
     }
 
@@ -63,7 +57,6 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            Log.d(TAG, "MyViewHolder: ");
             name = itemView.findViewById(R.id.tvUsername);
             record = itemView.findViewById(R.id.tv_record);
             profilePic = itemView.findViewById(R.id.ivAvatar);

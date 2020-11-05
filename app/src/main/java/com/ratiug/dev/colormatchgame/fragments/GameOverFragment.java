@@ -27,6 +27,7 @@ public class GameOverFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game_over, container, false);
+
         btnRestart = view.findViewById(R.id.btn_restart_game);
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override

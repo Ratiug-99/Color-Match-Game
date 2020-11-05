@@ -14,6 +14,8 @@ import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 import com.ratiug.dev.colormatchgame.UserDao;
 
+import java.util.Objects;
+
 public class NewRecordFragment extends Fragment {
     SharedPreferencesHelper sharedPreferencesHelper;
     private TextView tvNewRecord;
@@ -23,7 +25,7 @@ public class NewRecordFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferencesHelper = new SharedPreferencesHelper(getContext());
+        sharedPreferencesHelper = new SharedPreferencesHelper(Objects.requireNonNull(getContext()));
     }
 
     @Override
@@ -34,7 +36,7 @@ public class NewRecordFragment extends Fragment {
         tvNewRecord = v.findViewById(R.id.tv_new_record);
         tvNewRecord.setText(getContext().getResources().getString(R.string.new_record) + sharedPreferencesHelper.getRecord());
 
-       userDao.updateUserInfo(getContext());
+        userDao.updateUserInfo(getContext());
 
         startGame = v.findViewById(R.id.startGame);
         showButtonNewGame();
@@ -51,7 +53,7 @@ public class NewRecordFragment extends Fragment {
 
     private void restartGame() {
         GameFragment game = new GameFragment();
-        getActivity().getSupportFragmentManager().beginTransaction()
+        Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fl_container, game)
                 .commit();
     }

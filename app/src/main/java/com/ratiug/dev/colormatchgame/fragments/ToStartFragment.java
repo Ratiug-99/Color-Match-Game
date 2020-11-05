@@ -16,10 +16,12 @@ import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 import com.ratiug.dev.colormatchgame.activities.RatingActivity;
 import com.ratiug.dev.colormatchgame.activities.SettingsActivity;
 
+import java.util.Objects;
+
 public class ToStartFragment extends Fragment {
 
     private LinearLayout btnSettings;
-    private LinearLayout  btnStartGame;
+    private LinearLayout btnStartGame;
     private TextView tvRecordValue;
     private Button btnRating;
 
@@ -35,8 +37,9 @@ public class ToStartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mSharedPreferenceHelper = new SharedPreferencesHelper(getContext());
+        mSharedPreferenceHelper = new SharedPreferencesHelper(Objects.requireNonNull(getContext()));
         View view = inflater.inflate(R.layout.fragment_to_start, container, false);
+
         btnStartGame = view.findViewById(R.id.btn_start_game);
         btnSettings = view.findViewById(R.id.btn_settings);
         btnRating = view.findViewById(R.id.btnRating);
@@ -79,7 +82,7 @@ public class ToStartFragment extends Fragment {
 
     private void startGame() {
         GameFragment game = new GameFragment();
-        getActivity().getSupportFragmentManager().beginTransaction()
+        Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                 .add(R.id.fl_container, game)
                 .addToBackStack(null)
                 .commit();
