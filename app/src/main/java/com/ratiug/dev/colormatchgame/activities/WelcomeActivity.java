@@ -1,6 +1,7 @@
 package com.ratiug.dev.colormatchgame.activities;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,6 +55,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void setThemeApp() {
         AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
+
+        Resources res = getResources();
+        boolean enableQAurl = res.getBoolean(R.bool.windowLightStatusBarValue);
     }
 
     private void checkLocale() {

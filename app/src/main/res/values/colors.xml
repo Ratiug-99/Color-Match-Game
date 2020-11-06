@@ -5,6 +5,7 @@
     <color name="colorAccent">@color/black</color>
     <color name="colorActiveElement">@color/black</color>
     <color name="colorBackground" tools:ignore="ReferenceType">@drawable/background_white_theme</color>
+    <color name="colorBackgroundStatusBar">@color/white</color>
     <color name="colorBackgroundCardView">#f2f2f2</color>
     <color name="colorBackgroundCardViewMyPos">#a6a6a6</color>
     <color name="textColor">@color/black</color>

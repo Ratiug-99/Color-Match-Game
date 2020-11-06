@@ -5,6 +5,7 @@
     <color name="colorAccent">@color/white</color>
     <color name="colorActiveElement">@color/white</color>
     <color name="colorBackground">#12151A</color>
+    <color name="colorBackgroundStatusBar">@color/colorBackground</color>
     <color name="colorBackgroundCardView">#191c21</color>
     <color name="colorBackgroundCardViewMyPos">#111316</color>
     <color name="textColor">@color/white</color>
