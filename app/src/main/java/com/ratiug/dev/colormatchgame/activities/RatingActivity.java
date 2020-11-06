@@ -2,10 +2,13 @@ package com.ratiug.dev.colormatchgame.activities;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,12 +40,18 @@ public class RatingActivity extends AppCompatActivity {
     AdapterRating adapter;
     TextView name, record, ratingPos;
     CircleImageView profilePic;
+    CardView cardViewMyPosition;
+    ProgressBar pbLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
 
+        pbLoading = findViewById(R.id.pb_loading);
+        pbLoading.setVisibility(View.VISIBLE);
+
+        cardViewMyPosition = findViewById(R.id.cv_pos_in_rating);
         name = findViewById(R.id.tvUsername);
         record = findViewById(R.id.tv_record);
         profilePic = findViewById(R.id.ivAvatar);
@@ -82,6 +91,7 @@ public class RatingActivity extends AppCompatActivity {
                 }
                 adapter = new AdapterRating(RatingActivity.this, list);
                 recyclerView.setAdapter(adapter);
+                pbLoading.setVisibility(View.GONE);
             }
 
             @Override
@@ -92,11 +102,13 @@ public class RatingActivity extends AppCompatActivity {
     }
 
     private void setMyPosition(User profiles, int position) {
+
         name.setText(profiles.getName());
         record.setText(profiles.getRecord());
         ratingPos.setText(String.valueOf(position));
         Glide.with(profilePic.getContext())
                 .load(Uri.parse(profiles.getUri()))
                 .into(profilePic);
+        cardViewMyPosition.setVisibility(View.VISIBLE);
     }
 }
