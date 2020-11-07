@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 import com.ratiug.dev.colormatchgame.UserDao;
@@ -50,6 +51,8 @@ public class WelcomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
+        Animatoo.animateFade(this);
+//        Animatoo.animateSplit(this);
         finish();
     }
 
