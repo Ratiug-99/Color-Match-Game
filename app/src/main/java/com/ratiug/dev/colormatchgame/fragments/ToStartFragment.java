@@ -23,7 +23,7 @@ public class ToStartFragment extends Fragment {
     private LinearLayout btnSettings;
     private LinearLayout btnStartGame;
     private TextView tvRecordValue;
-    private Button btnRating;
+    private LinearLayout btnRating;
 
     private SharedPreferencesHelper mSharedPreferenceHelper;
 
@@ -42,7 +42,7 @@ public class ToStartFragment extends Fragment {
 
         btnStartGame = view.findViewById(R.id.btn_start_game);
         btnSettings = view.findViewById(R.id.btn_settings);
-        btnRating = view.findViewById(R.id.btnRating);
+        btnRating = view.findViewById(R.id.btn_rating);
         tvRecordValue = view.findViewById(R.id.tv_record_value);
 
         tvRecordValue.setText(String.valueOf(mSharedPreferenceHelper.getRecord()));
