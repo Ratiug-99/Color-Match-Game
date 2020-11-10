@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">@color/black</color>
     <color name="colorActiveElement">@color/black</color>
+    <color name="colorActiveElementPressed">#4e4e4e</color>
     <color name="colorBackground" tools:ignore="ReferenceType">@drawable/background_white_theme</color>
     <color name="colorBackgroundStatusBar">@color/white</color>
     <color name="colorBackgroundCardView">#f2f2f2</color>

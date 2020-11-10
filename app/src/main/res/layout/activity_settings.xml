@@ -220,7 +220,7 @@
         app:layout_constraintTop_toTopOf="@id/tv_exit"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_logout"
-        app:tint="@color/colorActiveElement" />
+        app:tint="@drawable/selector_icon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
