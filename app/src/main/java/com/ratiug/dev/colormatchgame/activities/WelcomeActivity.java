@@ -65,7 +65,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void checkLocale() {
         String prefLanguage = mSharedPreferencesHelper.getLanguage().trim(); // check on first load language and set it to SP
+        Log.d(TAG, "checkLocale: "  + prefLanguage);
         if (prefLanguage.equals("")) {
+            Log.d(TAG, "checkLocale: ");
             mSharedPreferencesHelper.setLanguage(getResources().getConfiguration().locale.toString().substring(0, 2));
         }
     }

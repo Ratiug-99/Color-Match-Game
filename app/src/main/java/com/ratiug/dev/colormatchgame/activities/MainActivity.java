@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,11 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setLocale(this);
         super.onCreate(savedInstanceState);
-
-        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
-
         setContentView(R.layout.activity_main);
+
         openToStartFragment();
     }
 
@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        setLocale(this);
         if (startActivity) {
+            setLocale(this);
             recreate();
         } else {
             startActivity = true;
@@ -81,13 +81,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setLocale(Activity context) {
+        mSharedPreferencesHelper = new SharedPreferencesHelper(this);
         Configuration conf = getBaseContext().getResources().getConfiguration();
         String prefLanguage = mSharedPreferencesHelper.getLanguage().trim();
-
+        Log.d(TAG, "setLocale: " + conf.locale.getLanguage() + " | " + prefLanguage);
         if (!"".equals(prefLanguage) && !conf.locale.getLanguage().equals(prefLanguage)) {
             Locale locale;
             locale = new Locale(mSharedPreferencesHelper.getLanguage());
             Configuration config = new Configuration(context.getResources().getConfiguration());
+            Log.d(TAG, "setLocale: " + locale.getLanguage());
             Locale.setDefault(locale);
             config.setLocale(locale);
             context.getBaseContext().getResources().updateConfiguration(config,
