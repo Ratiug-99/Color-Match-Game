@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ratiug.dev.colormatchgame.InternetUtils;
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 import com.ratiug.dev.colormatchgame.User;
@@ -31,6 +32,7 @@ public class WelcomeActivity extends AppCompatActivity {
     public static final String TAG = "DBG | SplashScreen ";
     UserDao userDao = new UserDao();
     DatabaseReference reference;
+    InternetUtils internetUtils = new InternetUtils();
     private SharedPreferencesHelper mSharedPreferencesHelper;
 
     @Override
@@ -47,14 +49,18 @@ public class WelcomeActivity extends AppCompatActivity {
             public void run() {
                 selectActivity();
             }
-        }, 1);
+        }, 1000);
 
     }
 
 
     private void selectActivity() {
         if (mSharedPreferencesHelper.getTokenId() != null) {
-            checkRecord();
+            if (internetUtils.isOnline(getApplicationContext())){
+                checkRecord();
+            }else {
+                openMainActivity();
+            }
         } else {
             openLoginActivity();
         }
