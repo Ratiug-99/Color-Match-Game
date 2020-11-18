@@ -26,13 +26,65 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
     <View
-        android:id="@+id/line"
+        android:id="@+id/line_top"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/textColor"
         app:layout_constraintTop_toBottomOf="@id/llc_topBar" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llc_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@id/line_top">
+<RadioGroup
+    android:id="@+id/rg_count_colors"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_height="match_parent">
+        <RadioButton
+            android:id="@+id/rb_clr4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_4_colors"
+            android:padding="5dp"/>
+
+        <RadioButton
+            android:id="@+id/rb_clr6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_6_colors"
+            android:padding="5dp"/>
+
+        <RadioButton
+            android:id="@+id/rb_clr8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_8_colors"
+            android:padding="5dp"/>
+
+        <RadioButton
+            android:id="@+id/rb_clr10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_10_colors"
+            android:padding="5dp"/>
+</RadioGroup>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:id="@+id/line_mid"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="45dp"
+        android:background="@color/textColor"
+        app:layout_constraintTop_toBottomOf="@id/line_top" />
 
     <ProgressBar
         android:id="@+id/pb_loading"
@@ -53,7 +105,7 @@
         app:layout_constraintBottom_toTopOf="@id/lineBot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llc_topBar" />
+        app:layout_constraintTop_toBottomOf="@+id/line_mid" />
 
     <View
         android:id="@+id/lineBot"

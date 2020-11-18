@@ -64,7 +64,6 @@ public class WelcomeActivity extends AppCompatActivity {
         } else {
             openLoginActivity();
         }
-
     }
 
     private void checkRecord() {
@@ -78,14 +77,15 @@ public class WelcomeActivity extends AppCompatActivity {
                     String cUserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
                     String lUser = p.getUid();
                     if (p.getUid() != null && cUserId.equals(lUser)) {
-                        int bdUserRecord = Integer.parseInt(p.getRecord());
-                        int record = mSharedPreferencesHelper.getRecord();
-                        if (bdUserRecord > record) {
-                            mSharedPreferencesHelper.setRecord(bdUserRecord);
-                            openMainActivity();
-                        } else {
-                            openMainActivity();
-                        }
+//                            int bdUserRecord = Integer.parseInt(p.getRecord());
+//                            int record = mSharedPreferencesHelper.getRecord();
+//                            if (bdUserRecord > record) {
+//                                mSharedPreferencesHelper.setRecord(bdUserRecord);
+//                                openMainActivity();
+//                            } else {
+//                                openMainActivity();
+//                            }
+                        openMainActivity();
                     }
                 }
             }

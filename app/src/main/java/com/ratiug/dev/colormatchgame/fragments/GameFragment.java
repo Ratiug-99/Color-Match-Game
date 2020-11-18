@@ -71,7 +71,8 @@ public class GameFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mSharedPreferencesHelper = new SharedPreferencesHelper(Objects.requireNonNull(getContext()));
-        record = mSharedPreferencesHelper.getRecord();
+
+        getRecordFromDB();
 
         if (mSharedPreferencesHelper.getTheme() == 1) {
             color_names = getContext().getResources().getStringArray(R.array.color_names_light);
@@ -85,13 +86,20 @@ public class GameFragment extends Fragment {
         vibrationStatus = mSharedPreferencesHelper.getVibrationStatus();
     }
 
+    private void getRecordFromDB() {
+        switch (selectedOptionsColor){
+            case 4 : record = mSharedPreferencesHelper.getRecord_4(); break;
+            case 6 : record = mSharedPreferencesHelper.getRecord_6(); break;
+            case 8 : record = mSharedPreferencesHelper.getRecord_8(); break;
+            case 10 : record = mSharedPreferencesHelper.getRecord_10(); break;
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
-//        tvNameRight = view.findViewById(R.id.tv_name_right);
-//        tvNameWrong = view.findViewById(R.id.tv_name_wrong);
         tvRightValue = view.findViewById(R.id.tv_right_value);
         tvWrongValue = view.findViewById(R.id.tv_wrong_value);
         tvRecordValue = view.findViewById(R.id.tv_record_value);
@@ -218,7 +226,7 @@ public class GameFragment extends Fragment {
                     btnYes.setEnabled(false);
                     if (newRecord) {
                         NewRecordFragment recordFragment = new NewRecordFragment();
-                        mSharedPreferencesHelper.setRecord(record);
+                        setNewRecordInDB();
                         openFragment(recordFragment);
                     } else {
                         FinishGameFragment finishGameFragment = new FinishGameFragment();
@@ -246,6 +254,16 @@ public class GameFragment extends Fragment {
         getActivity().bindService(mIntent, serviceConnection, 0);
         Objects.requireNonNull(getContext()).startService(mIntent);
         super.onResume();
+    }
+
+    private void setNewRecordInDB() {
+        switch (selectedOptionsColor){
+            case 4 : mSharedPreferencesHelper.setRecord_4(record);
+            case 6 : mSharedPreferencesHelper.setRecord_6(record);
+            case 8 : mSharedPreferencesHelper.setRecord_8(record);
+            case 10 : mSharedPreferencesHelper.setRecord_10(record);
+        }
+
     }
 
     private void openFragment(Fragment fragment) {

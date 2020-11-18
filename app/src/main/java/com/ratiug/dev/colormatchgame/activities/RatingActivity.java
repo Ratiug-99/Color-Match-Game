@@ -2,8 +2,11 @@ package com.ratiug.dev.colormatchgame.activities;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,10 +37,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RatingActivity extends AppCompatActivity {
     public static final String TAG = "DBG | RatingActivity";
     SharedPreferencesHelper mSharedPreferencesHelper;
+    RadioGroup radioGroupCountColors;
+    int countColors;
     DatabaseReference reference;
     RecyclerView recyclerView;
     ArrayList<User> list = new ArrayList();
     AdapterRating adapter;
+    RadioButton radioButtonColor4;
     TextView name, record, ratingPos;
     CircleImageView profilePic;
     CardView cardViewMyPosition;
@@ -62,7 +68,37 @@ public class RatingActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_rating);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
+        radioGroupCountColors = findViewById(R.id.rg_count_colors);
+        radioButtonColor4 = findViewById(R.id.rb_clr4);
+
         reference = FirebaseDatabase.getInstance().getReference().child("Users:");
+        radioGroupCountColors.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                Log.d(TAG, "onCheckedChanged: ");
+                pbLoading.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+                switch (i) {
+                    case R.id.rb_clr4:
+                        countColors = 4;
+                        break;
+                    case R.id.rb_clr6:
+                        countColors = 6;
+                        break;
+                    case R.id.rb_clr8:
+                        countColors = 8;
+                        break;
+                    case R.id.rb_clr10:
+                        countColors = 10;
+                        break;
+                }
+
+                showRating();
+            }
+        });
+
+        radioButtonColor4.setChecked(true);
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -74,8 +110,28 @@ public class RatingActivity extends AppCompatActivity {
                 Collections.sort(list, new Comparator<User>() {
                     @Override
                     public int compare(User user, User t1) {
-                        return Integer.parseInt(user.getRecord()) -
-                                Integer.parseInt((t1.getRecord()));
+                        int i;
+                        switch (countColors) {
+                            case 4:
+                                i = Integer.parseInt(user.getRecord_4()) -
+                                        Integer.parseInt((t1.getRecord_4()));
+                                break;
+                            case 6:
+                                i = Integer.parseInt(user.getRecord_6()) -
+                                        Integer.parseInt((t1.getRecord_6()));
+                                break;
+                            case 8:
+                                i = Integer.parseInt(user.getRecord_8()) -
+                                        Integer.parseInt((t1.getRecord_8()));
+                                break;
+                            case 10:
+                                i = Integer.parseInt(user.getRecord_10()) -
+                                        Integer.parseInt((t1.getRecord_10()));
+                                break;
+                            default:
+                                throw new IllegalStateException("Unexpected value: " + countColors);
+                        }
+                        return i;
                     }
                 });
                 Collections.reverse(list);
@@ -89,26 +145,58 @@ public class RatingActivity extends AppCompatActivity {
                         setMyPosition(d, i);
                     }
                 }
-                adapter = new AdapterRating(RatingActivity.this, list);
+                Log.d(TAG, "onDataChange: +" + countColors);
+                adapter = new AdapterRating(RatingActivity.this, list, countColors);
                 recyclerView.setAdapter(adapter);
+                recyclerView.setVisibility(View.VISIBLE);
                 pbLoading.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d(TAG, "onCancelled: " + error.getMessage());
             }
         });
+
+    }
+
+    private void showRating() {
+
     }
 
     private void setMyPosition(User profiles, int position) {
 
         name.setText(profiles.getName());
-        record.setText(profiles.getRecord());
+        switch (countColors) {
+            case 4:
+                record.setText(profiles.getRecord_4());
+                break;
+            case 6:
+                record.setText(profiles.getRecord_6());
+                break;
+            case 8:
+                record.setText(profiles.getRecord_8());
+                break;
+            case 10:
+                record.setText(profiles.getRecord_10());
+                break;
+        }
         ratingPos.setText(String.valueOf(position));
         Glide.with(profilePic.getContext())
                 .load(Uri.parse(profiles.getUri()))
                 .into(profilePic);
         cardViewMyPosition.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(TAG, "onPause: ");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.d(TAG, "onStop: ");
+        super.onStop();
     }
 }

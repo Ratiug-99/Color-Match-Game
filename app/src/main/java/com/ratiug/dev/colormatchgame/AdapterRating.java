@@ -2,6 +2,7 @@ package com.ratiug.dev.colormatchgame;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +24,12 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
     public static final String TAG = "DBG | AdapterRating";
     Context context;
     ArrayList<User> profiles;
+    int mCountColors;
 
-    public AdapterRating(Context c, ArrayList<User> p) {
+    public AdapterRating(Context c, ArrayList<User> p, int countColors) {
         context = c;
         profiles = p;
+        mCountColors = countColors;
     }
 
     @NonNull
@@ -38,7 +41,21 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.name.setText(profiles.get(position).getName());
-        holder.record.setText(profiles.get(position).getRecord());
+        switch (mCountColors) {
+            case 4:
+                holder.record.setText(profiles.get(position).getRecord_4());
+                break;
+            case 6:
+                holder.record.setText(profiles.get(position).getRecord_6());
+                break;
+            case 8:
+                holder.record.setText(profiles.get(position).getRecord_8());
+                break;
+            case 10:
+                holder.record.setText(profiles.get(position).getRecord_10());
+                break;
+        }
+        Log.d(TAG, "onBindViewHolder: " + holder.record.getText());
         holder.profilePic.setImageURI(Uri.parse(profiles.get(position).getUri()));
         holder.ratingPos.setText(String.valueOf(position + 1));
         Glide.with(holder.profilePic.getContext())

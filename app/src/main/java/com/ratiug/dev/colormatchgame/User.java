@@ -5,7 +5,10 @@ public class User{
     public String uid;
     public String email;
     public String name;
-    public String record;
+    public String record_4;
+    public String record_6;
+    public String record_8;
+    public String record_10;
     public String uri;
 
     public User() {
@@ -15,8 +18,50 @@ public class User{
         this.uid = uid;
         this.email = email;
         this.name = name;
-        this.record = record;
         this.uri = uri;
+    }
+
+    public User(String uid, String email, String name, String record_4, String record_6, String record_8, String record_10, String uri) {
+        this.uid = uid;
+        this.email = email;
+        this.name = name;
+        this.record_4 = record_4;
+        this.record_6 = record_6;
+        this.record_8 = record_8;
+        this.record_10 = record_10;
+        this.uri = uri;
+    }
+
+    public String getRecord_4() {
+        return record_4;
+    }
+
+    public void setRecord_4(String record_4) {
+        this.record_4 = record_4;
+    }
+
+    public String getRecord_6() {
+        return record_6;
+    }
+
+    public void setRecord_6(String record_6) {
+        this.record_6 = record_6;
+    }
+
+    public String getRecord_8() {
+        return record_8;
+    }
+
+    public void setRecord_8(String record_8) {
+        this.record_8 = record_8;
+    }
+
+    public String getRecord_10() {
+        return record_10;
+    }
+
+    public void setRecord_10(String record_10) {
+        this.record_10 = record_10;
     }
 
     public String getUid() {
@@ -41,14 +86,6 @@ public class User{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getRecord() {
-        return record;
-    }
-
-    public void setRecord(String record) {
-        this.record = record;
     }
 
     public String getUri() {
