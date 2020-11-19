@@ -42,9 +42,6 @@ public class ToStartFragment extends Fragment {
         btnStartGame = view.findViewById(R.id.btn_start_game);
         btnSettings = view.findViewById(R.id.btn_settings);
         btnRating = view.findViewById(R.id.btn_rating);
-        tvRecordValue = view.findViewById(R.id.tv_record_value);
-
-        tvRecordValue.setText(String.valueOf(mSharedPreferenceHelper.getRecord()));
 
         btnStartGame.setOnClickListener(new View.OnClickListener() {
             @Override

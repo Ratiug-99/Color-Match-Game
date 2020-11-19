@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setLocale(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.d(TAG, "onCreate");
         openToStartFragment();
     }
 
@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        Log.d(TAG, "onResume");
         if (startActivity) {
             setLocale(this);
             recreate();
@@ -78,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity = true;
         }
         super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.d(TAG, "onStop");
+        super.onStop();
     }
 
     public void setLocale(Activity context) {

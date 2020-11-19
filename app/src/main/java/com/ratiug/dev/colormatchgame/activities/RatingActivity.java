@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,6 +49,7 @@ public class RatingActivity extends AppCompatActivity {
     CircleImageView profilePic;
     CardView cardViewMyPosition;
     ProgressBar pbLoading;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,10 @@ public class RatingActivity extends AppCompatActivity {
 
         pbLoading = findViewById(R.id.pb_loading);
         pbLoading.setVisibility(View.VISIBLE);
+
+        swipeRefreshLayout = findViewById(R.id.srl_swipe);
+
+
 
         cardViewMyPosition = findViewById(R.id.cv_pos_in_rating);
         name = findViewById(R.id.tvUsername);
@@ -99,9 +105,24 @@ public class RatingActivity extends AppCompatActivity {
 
         radioButtonColor4.setChecked(true);
 
-        reference.addValueEventListener(new ValueEventListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                showRating();
+
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+    }
+
+    private void showRating() {
+        Log.d(TAG, "showRating: ");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onDataChange: ");
                 list.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     User p = dataSnapshot1.getValue(User.class);
@@ -148,6 +169,7 @@ public class RatingActivity extends AppCompatActivity {
                 Log.d(TAG, "onDataChange: +" + countColors);
                 adapter = new AdapterRating(RatingActivity.this, list, countColors);
                 recyclerView.setAdapter(adapter);
+//                reference.removeEventListener(this);
                 recyclerView.setVisibility(View.VISIBLE);
                 pbLoading.setVisibility(View.GONE);
             }
@@ -158,9 +180,6 @@ public class RatingActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void showRating() {
 
     }
 

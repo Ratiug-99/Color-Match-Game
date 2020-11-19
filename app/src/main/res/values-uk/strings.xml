@@ -62,4 +62,8 @@
     <string name="rating">Рейтинг</string>
     <string name="congratulations">Вітаємо!</string>
     <string name="press_back_again">Натисніть назад ще раз, що б вийти</string>
+    <string name="_4_colors">4 кольори</string>
+    <string name="_6_colors">6 кольорів</string>
+    <string name="_8_colors">8 кольорів</string>
+    <string name="_10_colors">10 кольорів</string>
 </resources>

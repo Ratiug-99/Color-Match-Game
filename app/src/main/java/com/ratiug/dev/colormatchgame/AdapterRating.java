@@ -27,6 +27,7 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
     int mCountColors;
 
     public AdapterRating(Context c, ArrayList<User> p, int countColors) {
+        Log.d(TAG, "AdapterRating");
         context = c;
         profiles = p;
         mCountColors = countColors;
@@ -35,11 +36,13 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d(TAG, "onCreateViewHolder");
         return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_rating, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Log.d(TAG, "BindViewHolder");
         holder.name.setText(profiles.get(position).getName());
         switch (mCountColors) {
             case 4:
@@ -65,6 +68,7 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "getItemCount" + profiles.size());
         return profiles.size();
     }
 
@@ -74,6 +78,7 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            Log.d(TAG, "MyViewHolder");
             name = itemView.findViewById(R.id.tvUsername);
             record = itemView.findViewById(R.id.tv_record);
             profilePic = itemView.findViewById(R.id.ivAvatar);

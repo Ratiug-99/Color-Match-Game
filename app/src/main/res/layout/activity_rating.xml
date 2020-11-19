@@ -50,6 +50,7 @@
             android:id="@+id/rb_clr4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
             android:text="@string/_4_colors"
             android:padding="5dp"/>
 
@@ -57,6 +58,8 @@
             android:id="@+id/rb_clr6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
+
             android:text="@string/_6_colors"
             android:padding="5dp"/>
 
@@ -64,6 +67,7 @@
             android:id="@+id/rb_clr8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
             android:text="@string/_8_colors"
             android:padding="5dp"/>
 
@@ -71,6 +75,8 @@
             android:id="@+id/rb_clr10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
+
             android:text="@string/_10_colors"
             android:padding="5dp"/>
 </RadioGroup>
@@ -96,8 +102,8 @@
         app:layout_constraintStart_toStartOf="parent"
         android:visibility="invisible"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_rating"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_swipe"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="6dp"
@@ -105,7 +111,19 @@
         app:layout_constraintBottom_toTopOf="@id/lineBot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_mid" />
+        app:layout_constraintTop_toBottomOf="@+id/line_mid"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_rating"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+
+            />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
     <View
         android:id="@+id/lineBot"
