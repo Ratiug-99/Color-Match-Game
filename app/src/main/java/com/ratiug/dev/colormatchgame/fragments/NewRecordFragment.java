@@ -2,6 +2,7 @@ package com.ratiug.dev.colormatchgame.fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.Objects;
 public class NewRecordFragment extends Fragment {
     SharedPreferencesHelper sharedPreferencesHelper;
     private TextView tvNewRecord;
+    int record;
     private LinearLayout startGame;
     private UserDao userDao = new UserDao();
 
@@ -34,7 +36,20 @@ public class NewRecordFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_new_record, container, false);
 
         tvNewRecord = v.findViewById(R.id.tv_new_record);
-        tvNewRecord.setText(getContext().getResources().getString(R.string.new_record) + sharedPreferencesHelper.getRecord());
+
+        String[] countColorOptions;
+        countColorOptions = getContext().getResources().getStringArray(R.array.count_colors_for_select);
+        int  selectedOptionsColor;
+        selectedOptionsColor = Integer.parseInt(countColorOptions[sharedPreferencesHelper.getCountColors()]);
+        Log.d("DBG", "onCreateView: " + selectedOptionsColor);
+        switch (selectedOptionsColor){
+            case 4 : record = sharedPreferencesHelper.getRecord_4(); break;
+            case 6 : record = sharedPreferencesHelper.getRecord_6(); break;
+            case 8 : record = sharedPreferencesHelper.getRecord_8(); break;
+            case 10 : record = sharedPreferencesHelper.getRecord_10(); break;
+
+        }
+        tvNewRecord.setText(getContext().getResources().getString(R.string.new_record) + record);
 
         userDao.updateUserInfo(getContext());
 
