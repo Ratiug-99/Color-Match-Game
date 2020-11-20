@@ -258,10 +258,10 @@ public class GameFragment extends Fragment {
 
     private void setNewRecordInDB() {
         switch (selectedOptionsColor){
-            case 4 : mSharedPreferencesHelper.setRecord_4(record);
-            case 6 : mSharedPreferencesHelper.setRecord_6(record);
-            case 8 : mSharedPreferencesHelper.setRecord_8(record);
-            case 10 : mSharedPreferencesHelper.setRecord_10(record);
+            case 4 : mSharedPreferencesHelper.setRecord_4(record); break;
+            case 6 : mSharedPreferencesHelper.setRecord_6(record); break;
+            case 8 : mSharedPreferencesHelper.setRecord_8(record); break;
+            case 10 : mSharedPreferencesHelper.setRecord_10(record); break;
         }
 
     }
