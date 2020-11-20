@@ -17,8 +17,8 @@
     <string name="select_count_numbers">Кількість кольорів</string>
     <string name="theme">Тема</string>
     <string name="language">Мова</string>
-    <string name="english">Англійська</string>
-    <string name="russian">Російська</string>
+    <string name="english">English</string>
+    <string name="russian">Русский</string>
     <string name="ukrainian">Українська</string>
     <string name="vibration">Вібрація</string>
 
