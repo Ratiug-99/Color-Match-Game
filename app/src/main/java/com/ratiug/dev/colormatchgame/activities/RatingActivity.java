@@ -1,5 +1,6 @@
 package com.ratiug.dev.colormatchgame.activities;
 
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -205,6 +206,12 @@ public class RatingActivity extends AppCompatActivity {
                 .load(Uri.parse(profiles.getUri()))
                 .into(profilePic);
         cardViewMyPosition.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        recreate();
     }
 
     @Override

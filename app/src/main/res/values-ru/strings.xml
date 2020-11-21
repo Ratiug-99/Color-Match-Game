@@ -9,7 +9,7 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="time_left_00_00">Осталось времени: \t</string>
-    <string name="new_record">Новий рекорд: </string>
+    <string name="new_record">"Новый рекорд: "</string>
     <string name="your_score">Ваши очки: </string>
     <string name="restart_game">Начать заново</string>
     <string name="game_over">Конец игры!</string>

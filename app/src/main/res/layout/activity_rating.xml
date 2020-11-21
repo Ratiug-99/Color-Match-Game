@@ -50,7 +50,7 @@
             android:id="@+id/rb_clr4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:text="@string/_4_colors"
             android:padding="5dp"/>
 
@@ -58,7 +58,7 @@
             android:id="@+id/rb_clr6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="10sp"
 
             android:text="@string/_6_colors"
             android:padding="5dp"/>
@@ -67,7 +67,7 @@
             android:id="@+id/rb_clr8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:text="@string/_8_colors"
             android:padding="5dp"/>
 
@@ -75,7 +75,7 @@
             android:id="@+id/rb_clr10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="10sp"
 
             android:text="@string/_10_colors"
             android:padding="5dp"/>
