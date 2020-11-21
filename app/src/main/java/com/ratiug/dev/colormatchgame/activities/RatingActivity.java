@@ -207,31 +207,49 @@ public class RatingActivity extends AppCompatActivity {
                 .into(profilePic);
         Log.d(TAG, "setMyPosition: " + position);
 
-        switch (position) {
-            case 1:
-                profilePic.setBorderColor(getResources().getColor(R.color.color_gold));
-                name.setTextColor(getResources().getColor(R.color.color_gold));
-                record.setTextColor(getResources().getColor(R.color.color_gold));
-                ratingPos.setTextColor(getResources().getColor(R.color.color_gold));
-                break;
-            case 2:
-                profilePic.setBorderColor(getResources().getColor(R.color.color_silver));
-                name.setTextColor(getResources().getColor(R.color.color_silver));
-                record.setTextColor(getResources().getColor(R.color.color_silver));
-                ratingPos.setTextColor(getResources().getColor(R.color.color_silver));
-                break;
-            case 3:
-                profilePic.setBorderColor(getResources().getColor(R.color.color_bronze));
-                name.setTextColor(getResources().getColor(R.color.color_bronze));
-                record.setTextColor(getResources().getColor(R.color.color_bronze));
-                ratingPos.setTextColor(getResources().getColor(R.color.color_bronze));
-                break;
-            default:
-                profilePic.setBorderColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
-                name.setTextColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
-                record.setTextColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
-                ratingPos.setTextColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
-                break;
+        Log.d(TAG, "setMyPosition: them" + mSharedPreferencesHelper.getTheme());
+        if (mSharedPreferencesHelper.getTheme() == 2) {
+            switch (position) {
+                case 1:
+                    profilePic.setBorderColor(getResources().getColor(R.color.color_gold));
+                    name.setTextColor(getResources().getColor(R.color.color_gold));
+                    record.setTextColor(getResources().getColor(R.color.color_gold));
+                    ratingPos.setTextColor(getResources().getColor(R.color.color_gold));
+                    break;
+                case 2:
+                    profilePic.setBorderColor(getResources().getColor(R.color.color_silver));
+                    name.setTextColor(getResources().getColor(R.color.color_silver));
+                    record.setTextColor(getResources().getColor(R.color.color_silver));
+                    ratingPos.setTextColor(getResources().getColor(R.color.color_silver));
+                    break;
+                case 3:
+                    profilePic.setBorderColor(getResources().getColor(R.color.color_bronze));
+                    name.setTextColor(getResources().getColor(R.color.color_bronze));
+                    record.setTextColor(getResources().getColor(R.color.color_bronze));
+                    ratingPos.setTextColor(getResources().getColor(R.color.color_bronze));
+                    break;
+                default:
+                    profilePic.setBorderColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
+                    name.setTextColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
+                    record.setTextColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
+                    ratingPos.setTextColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
+                    break;
+            }
+        } else {
+            switch (position) {
+                case 1:
+                   cardViewMyPosition.setCardBackgroundColor(getResources().getColor(R.color.color_gold));
+                    break;
+                case 2:
+                    cardViewMyPosition.setCardBackgroundColor(getResources().getColor(R.color.color_silver));
+                    break;
+                case 3:
+                    cardViewMyPosition.setCardBackgroundColor(getResources().getColor(R.color.color_bronze));
+                    break;
+                default:
+                    cardViewMyPosition.setCardBackgroundColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
+                    break;
+            }
         }
         cardViewMyPosition.setVisibility(View.VISIBLE);
     }

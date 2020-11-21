@@ -24,6 +24,7 @@
     <color name="lime">#00FF00</color>
     <color name="pink">#FF00FF</color>
     <color name="black">#000000</color>
+    <color name="colorBackgroundDropDown">@color/colorBackgroundCardViewMyPos</color>
 
     <array name="colors">
         <item>@color/white</item>

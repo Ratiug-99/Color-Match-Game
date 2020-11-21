@@ -31,6 +31,7 @@
     //////////////////////////////////////////////////
     <color name="grayForGradient">#C6C5C5</color>
     <color name="darkRed">#8F0202</color>
+    <color name="colorBackgroundDropDown">@color/grayForGradient</color>
 
     <array name="colors">
         <item>@color/black</item>
