@@ -26,6 +26,7 @@
             <TextView
                 android:id="@+id/tv_name_right"
                 style="@style/topBarItems"
+                android:textSize="@dimen/normal_text"
                 android:layout_marginEnd="5dp"
                 android:text="@string/right"
                 android:textColor="@color/green" />
@@ -34,12 +35,14 @@
                 android:id="@+id/tv_right_value"
                 style="@style/topBarItems"
                 android:text="@string/_0"
+                android:textSize="@dimen/normal_text"
                 android:textColor="@color/green"
                 android:layout_marginEnd="15dp" />
 
             <TextView
                 android:id="@+id/tv_name_wrong"
                 style="@style/topBarItems"
+                android:textSize="@dimen/normal_text"
                 android:layout_marginEnd="5dp"
                 android:text="@string/wrong"
                 android:textColor="@color/red" />
@@ -48,6 +51,7 @@
                 android:id="@+id/tv_wrong_value"
                 style="@style/topBarItems"
                 android:text="@string/_0"
+                android:textSize="@dimen/normal_text"
                 android:textColor="@color/red"
                 android:layout_marginEnd="15dp" />
 
@@ -55,11 +59,13 @@
                 style="@style/topBarItems"
                 android:layout_marginEnd="5dp"
                 android:text="@string/record"
+                android:textSize="@dimen/normal_text"
                 android:textColor="@color/colorAccentText" />
 
             <TextView
                 android:id="@+id/tv_record_value"
                 style="@style/topBarItems"
+                android:textSize="@dimen/normal_text"
                 android:layout_marginEnd="15dp"
                 android:text="@string/_0"
                 android:textColor="@color/colorAccentText" />
@@ -91,6 +97,7 @@
         <TextView
             android:id="@+id/tv_time_left"
             android:layout_width="wrap_content"
+            android:textSize="@dimen/normal_text"
             android:layout_height="wrap_content"
             android:text="@string/time_left_00_00"
             android:textColor="@color/colorAccentText"

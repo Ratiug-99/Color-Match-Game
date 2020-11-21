@@ -19,6 +19,7 @@
 
         <TextView
             android:text="@string/settings"
+            android:textSize="@dimen/page_title"
             style="@style/topBarItems"
             android:textColor="@color/textColor"
             android:layout_marginStart="10dp"/>
@@ -40,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="@dimen/normal_text"
         android:layout_margin="16dp"
         android:textColor="@color/textColor"
         android:text="@string/select_count_numbers"/>
@@ -84,7 +85,8 @@
         android:text="@string/theme"
         app:layout_constraintTop_toBottomOf="@id/tv_count_numbers"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
+        android:textSize="@dimen/normal_text"
+
         android:textColor="@color/textColor"
         android:layout_margin="16dp"/>
 
@@ -151,6 +153,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
            android:layout_gravity="center"
+            android:textSize="@dimen/normal_text"
             android:layout_margin="16dp"
             android:textColor="@color/textColor"
             android:buttonTint="@color/colorActiveElement"
@@ -162,6 +165,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
+            android:textSize="@dimen/normal_text"
+
             android:textColor="@color/textColor"
             android:buttonTint="@color/colorActiveElement"
             android:text="@string/russian"/>
@@ -171,6 +176,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textSize="@dimen/normal_text"
             android:textColor="@color/textColor"
             android:buttonTint="@color/colorActiveElement"
             android:text="@string/ukrainian"
@@ -186,7 +192,8 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp"
         android:textColor="@color/textColor"
-        android:textSize="18sp"/>
+        android:textSize="@dimen/normal_text"
+        />
 
     <CheckBox
         android:id="@+id/cb_vibration"
@@ -204,7 +211,7 @@
         android:layout_height="wrap_content"
         android:text="@string/exit"
         app:layout_constraintTop_toBottomOf="@id/tv_vibration"
-        android:textSize="18sp"
+        android:textSize="@dimen/normal_text"
         android:textColor="@color/textColor"
         android:layout_marginStart="16dp"
         android:layout_marginTop="50dp"

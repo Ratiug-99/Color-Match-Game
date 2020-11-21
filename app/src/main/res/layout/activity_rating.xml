@@ -19,6 +19,7 @@
 
         <TextView
             style="@style/topBarItems"
+            android:textSize="@dimen/page_title"
             android:layout_marginStart="10dp"
             android:text="@string/rating"
             android:textColor="@color/textColor" />

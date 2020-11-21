@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="@string/congratulations"
-        android:textColor="@color/colorAccentText"
+        android:textColor="@color/orange"
         android:textSize="@dimen/color_size_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -42,7 +42,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         android:layout_marginBottom="35dp"
         android:textSize="@dimen/color_size_text"
-        android:textColor="@color/colorAccentText"
+        android:textColor="@color/orange"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout

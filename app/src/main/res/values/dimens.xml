@@ -3,4 +3,6 @@
     <dimen name="color_size_text">46sp</dimen>
     <dimen name="buttons_answer_text_size">26sp</dimen>
     <dimen name="task_text_size">26sp</dimen>
+    <dimen name="page_title">20sp</dimen>
+    <dimen name="normal_text">16sp</dimen>
 </resources>

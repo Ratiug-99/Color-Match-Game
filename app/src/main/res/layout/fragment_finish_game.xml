@@ -57,7 +57,7 @@
             android:layout_gravity="center"
             android:text="@string/restart_game"
             android:textColor="@drawable/selector_icon"
-            android:textSize="16sp"
+            android:textSize="@dimen/normal_text"
             android:textStyle="bold" />
     </LinearLayout>
 
