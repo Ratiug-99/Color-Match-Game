@@ -21,6 +21,10 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 import com.ratiug.dev.colormatchgame.TimerService;
@@ -60,6 +64,7 @@ public class GameFragment extends Fragment {
     private boolean differentValues = true;
     private boolean correctAnswer = false;
     private boolean vibrationStatus;
+    private AdView mAdView;
     ////
     private int wrongVibration = 250;
     private int gameOverVibration = 1000;
@@ -70,6 +75,7 @@ public class GameFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         mSharedPreferencesHelper = new SharedPreferencesHelper(Objects.requireNonNull(getContext()));
 
         getRecordFromDB();
@@ -79,6 +85,8 @@ public class GameFragment extends Fragment {
         } else {
             color_names = getContext().getResources().getStringArray(R.array.color_names);
         }
+
+
 
         countColorOptions = getContext().getResources().getStringArray(R.array.count_colors_for_select);
         colors = Objects.requireNonNull(getContext()).getResources().getIntArray(R.array.colors);
@@ -99,6 +107,43 @@ public class GameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
+
+        mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
 
         tvRightValue = view.findViewById(R.id.tv_right_value);
         tvWrongValue = view.findViewById(R.id.tv_wrong_value);
