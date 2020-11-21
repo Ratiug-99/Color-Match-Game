@@ -137,9 +137,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_pos_in_rating"
         android:layout_width="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/colorBackgroundCardViewMyPos"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -147,7 +148,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackgroundCardViewMyPos"
             android:padding="3dp">
 
             <TextView

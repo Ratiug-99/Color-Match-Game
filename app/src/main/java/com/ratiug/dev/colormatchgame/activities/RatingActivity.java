@@ -120,6 +120,7 @@ public class RatingActivity extends AppCompatActivity {
 
     private void showRating() {
         Log.d(TAG, "showRating: ");
+        cardViewMyPosition.setVisibility(View.GONE);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -205,6 +206,18 @@ public class RatingActivity extends AppCompatActivity {
         Glide.with(profilePic.getContext())
                 .load(Uri.parse(profiles.getUri()))
                 .into(profilePic);
+        Log.d(TAG, "setMyPosition: " + position);
+        if (position == 1){
+            Log.d(TAG, "setMyPosition: 1");
+            cardViewMyPosition.setBackgroundColor(getResources().getColor(R.color.color_gold));
+        }
+
+        switch (position){
+            case 1: cardViewMyPosition.setBackgroundColor(getResources().getColor(R.color.color_gold)); break;
+            case 2: cardViewMyPosition.setBackgroundColor(getResources().getColor(R.color.color_silver)); break;
+            case 3: cardViewMyPosition.setBackgroundColor(getResources().getColor(R.color.color_bronze)); break;
+            default: cardViewMyPosition.setBackgroundColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos)); break;
+        }
         cardViewMyPosition.setVisibility(View.VISIBLE);
     }
 
