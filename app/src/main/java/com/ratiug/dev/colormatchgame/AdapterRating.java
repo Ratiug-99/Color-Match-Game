@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -25,11 +26,14 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
     Context context;
     ArrayList<User> profiles;
     int mCountColors;
+    private SharedPreferencesHelper mSharedPreferencesHelper;
+
 
     public AdapterRating(Context c, ArrayList<User> p, int countColors) {
         Log.d(TAG, "AdapterRating");
         context = c;
         profiles = p;
+        mSharedPreferencesHelper = new SharedPreferencesHelper(context);
         mCountColors = countColors;
     }
 
@@ -59,6 +63,50 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
                 break;
         }
         Log.d(TAG, "onBindViewHolder: " + holder.record.getText());
+
+        if (mSharedPreferencesHelper.getTheme() == 2) {
+            switch (position + 1) {
+                case 1:
+                   holder.profilePic.setBorderColor(context.getResources().getColor(R.color.color_gold));
+                    holder.name.setTextColor(context.getResources().getColor(R.color.color_gold));
+                    holder.record.setTextColor(context.getResources().getColor(R.color.color_gold));
+                    holder.ratingPos.setTextColor(context.getResources().getColor(R.color.color_gold));
+                    break;
+                case 2:
+                    holder.profilePic.setBorderColor(context.getResources().getColor(R.color.color_silver));
+                    holder.name.setTextColor(context.getResources().getColor(R.color.color_silver));
+                    holder.record.setTextColor(context.getResources().getColor(R.color.color_silver));
+                    holder.ratingPos.setTextColor(context.getResources().getColor(R.color.color_silver));
+                    break;
+                case 3:
+                    holder.profilePic.setBorderColor(context.getResources().getColor(R.color.color_bronze));
+                    holder.name.setTextColor(context.getResources().getColor(R.color.color_bronze));
+                    holder.record.setTextColor(context.getResources().getColor(R.color.color_bronze));
+                     holder.ratingPos.setTextColor(context.getResources().getColor(R.color.color_bronze));
+                    break;
+                default:
+                     holder.profilePic.setBorderColor(context.getResources().getColor(R.color.black));
+                     holder.name.setTextColor(context.getResources().getColor(R.color.textColor));
+                     holder.record.setTextColor(context.getResources().getColor(R.color.textColor));
+                     holder.ratingPos.setTextColor(context.getResources().getColor(R.color.textColor));
+                    break;
+            }
+        } else {
+            switch (position + 1) {
+                case 1:
+                     holder.clCard.setBackgroundColor(context.getResources().getColor(R.color.color_gold));
+                    break;
+                case 2:
+                    holder.clCard.setBackgroundColor(context.getResources().getColor(R.color.color_silver));
+                    break;
+                case 3:
+                    holder.clCard.setBackgroundColor(context.getResources().getColor(R.color.color_bronze));
+                    break;
+                default:
+                    holder.clCard.setBackgroundColor(context.getResources().getColor(R.color.colorBackgroundCardViewMyPos));
+                    break;
+            }
+        }
         holder.profilePic.setImageURI(Uri.parse(profiles.get(position).getUri()));
         holder.ratingPos.setText(String.valueOf(position + 1));
         Glide.with(holder.profilePic.getContext())
@@ -74,6 +122,7 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name, record, ratingPos;
+        ConstraintLayout clCard;
         CircleImageView profilePic;
 
         public MyViewHolder(View itemView) {
@@ -83,6 +132,7 @@ public class AdapterRating extends RecyclerView.Adapter<AdapterRating.MyViewHold
             record = itemView.findViewById(R.id.tv_record);
             profilePic = itemView.findViewById(R.id.ivAvatar);
             ratingPos = itemView.findViewById(R.id.tv_rating_no);
+            clCard = itemView.findViewById(R.id.cl_card);
         }
     }
 }

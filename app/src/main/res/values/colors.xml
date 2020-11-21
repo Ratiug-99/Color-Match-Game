@@ -13,7 +13,7 @@
     <color name="colorAccentText">@color/blue</color>
     <color name="colorBackgroundButtonGoogle">@color/white</color>
     <color name="color_gold">#daa520</color>
-    <color name="color_silver">#c0c0c0</color>
+    <color name="color_silver">#dadada</color>
     <color name="color_bronze">#cd7f32</color>
     /////////////////////////////////////////////////
     <color name="white">#FFFFFF</color>

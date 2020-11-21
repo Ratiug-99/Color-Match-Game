@@ -229,10 +229,10 @@ public class RatingActivity extends AppCompatActivity {
                     ratingPos.setTextColor(getResources().getColor(R.color.color_bronze));
                     break;
                 default:
-                    profilePic.setBorderColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
-                    name.setTextColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
-                    record.setTextColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
-                    ratingPos.setTextColor(getResources().getColor(R.color.colorBackgroundCardViewMyPos));
+                    profilePic.setBorderColor(getResources().getColor(R.color.black));
+                    name.setTextColor(getResources().getColor(R.color.textColor));
+                    record.setTextColor(getResources().getColor(R.color.textColor));
+                    ratingPos.setTextColor(getResources().getColor(R.color.textColor));
                     break;
             }
         } else {
