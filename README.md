@@ -1,6 +1,6 @@
 # Color Match Game
 
-![SplashScreen](SplashScreen.png "Splash Screen launch app")
+![SplashScreen](SplashScreen.jpg "Splash Screen launch app")
 
 # Project Overview  
 This is a game that was given as homework at the university (*But slightly improved :)* )
