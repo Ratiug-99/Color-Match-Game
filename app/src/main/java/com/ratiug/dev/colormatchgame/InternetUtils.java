@@ -13,7 +13,7 @@ public class InternetUtils {
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
             return true;
         }else{
-            Toast.makeText(ct, R.string.chek_internet_connection, Toast.LENGTH_SHORT).show();
+             Toast.makeText(ct, R.string.chek_internet_connection, Toast.LENGTH_SHORT).show();
             return false;
         }
 
