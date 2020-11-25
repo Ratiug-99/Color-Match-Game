@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mSharedPreferencesHelper = new SharedPreferencesHelper(this);
-
+        Log.d(TAG, "onCreate: tokenID = " + mSharedPreferencesHelper.getTokenId() );
         mAuth = FirebaseAuth.getInstance();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

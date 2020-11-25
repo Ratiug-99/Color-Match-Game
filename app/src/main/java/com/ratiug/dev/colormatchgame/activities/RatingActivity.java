@@ -109,7 +109,7 @@ public class RatingActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 showRating();
-
+            //todo check interner update
                 adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
