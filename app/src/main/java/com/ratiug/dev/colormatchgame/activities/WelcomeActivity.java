@@ -1,6 +1,7 @@
 package com.ratiug.dev.colormatchgame.activities;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mSharedPreferencesHelper = new SharedPreferencesHelper(this);
-        setThemeApp();
+        checkThemeApp();
         checkLocale();
         setFullScreen();
         super.onCreate(savedInstanceState);
@@ -76,6 +77,24 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(intent);
         Animatoo.animateFade(this);
         finish();
+    }
+
+    private void checkThemeApp(){
+        Log.d(TAG, "checkThemeApp: " + mSharedPreferencesHelper.getTheme());
+        if (mSharedPreferencesHelper.getTheme() == -1){
+
+            int currentNightMode = getApplicationContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            switch (currentNightMode) {
+                case Configuration.UI_MODE_NIGHT_NO:
+                    mSharedPreferencesHelper.setTheme(1);
+                    break;
+                case Configuration.UI_MODE_NIGHT_YES:
+                    mSharedPreferencesHelper.setTheme(2);
+                    break;
+        }
+        }
+        setThemeApp();
+        Log.d(TAG, "checkThemeApp: " + mSharedPreferencesHelper.getTheme());
     }
 
     private void setThemeApp() {//todo check theme on first load
