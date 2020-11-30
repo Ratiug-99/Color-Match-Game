@@ -42,13 +42,8 @@ public class WelcomeActivity extends AppCompatActivity {
         setFullScreen();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        Log.d(TAG, "onCreate: tokenID = " + mSharedPreferencesHelper.getTokenId() );
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                selectActivity();
-            }
-        }, 1000);
+        handler.postDelayed(this::selectActivity, 1000);
     }
 
 
@@ -97,13 +92,13 @@ public class WelcomeActivity extends AppCompatActivity {
         Log.d(TAG, "checkThemeApp: " + mSharedPreferencesHelper.getTheme());
     }
 
-    private void setThemeApp() {//todo check theme on first load
+    private void setThemeApp() {
         Log.d(TAG, "setThemeApp: " + mSharedPreferencesHelper.getTheme());
         AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
     }
 
     private void checkLocale() {
-        String prefLanguage = mSharedPreferencesHelper.getLanguage().trim(); //todo check on first load language and set it to SP
+        String prefLanguage = mSharedPreferencesHelper.getLanguage().trim();
         Log.d(TAG, "checkLocale: " + prefLanguage);
         if (prefLanguage.equals("")) {
             Log.d(TAG, "checkLocale: ");
