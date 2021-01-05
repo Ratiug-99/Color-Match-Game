@@ -1,5 +1,6 @@
 package com.ratiug.dev.colormatchgame.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -20,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -242,7 +244,8 @@ public class GameFragment extends Fragment {
 
     @Override
     public void onStop() {
-        Objects.requireNonNull(getActivity()).unregisterReceiver(broadcastReceiver);
+    //    Objects.requireNonNull(getActivity()).unregisterReceiver(broadcastReceiver);
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(broadcastReceiver);
         getActivity().stopService(new Intent(getContext(), TimerService.class));
         super.onStop();
     }
@@ -250,14 +253,20 @@ public class GameFragment extends Fragment {
     @Override
     public void onResume() {
         broadcastReceiver = new BroadcastReceiver() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onReceive(Context context, Intent intent) {
                 String value = convertMlsToCorrectDateFormatString(intent.getLongExtra(KEY_TIME_VALUE_LONG, 0));
 
                 long timeLeft = intent.getLongExtra(KEY_TIME_VALUE_LONG, 0);
                 if (!Objects.equals(intent.getStringExtra(KEY_TIME_VALUE_STRING), "Finish")) {
-                    tvTimeLeft.setText(getContext().getText(R.string.time_left_00_00) + value);
-                    pbTimeLeft.setProgress((int) timeLeft);
+                    try {
+                        tvTimeLeft.setText(getContext().getText(R.string.time_left_00_00) + value);
+                        pbTimeLeft.setProgress((int) timeLeft);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 } else {
                     if (vibrationStatus) {
                         makeVibration(finishVibration);
@@ -329,10 +338,15 @@ public class GameFragment extends Fragment {
     }
 
     private void makeVibration(int timeToVibration) {
-        if (Build.VERSION.SDK_INT >= 26) {
-            ((Vibrator) Objects.requireNonNull(getActivity()).getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(timeToVibration, 100));
+         final long[] VIBRATE_PATTERN = { 500, 500 };
+
+        Vibrator mVibrator = (Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // API 26 and above
+            mVibrator.vibrate(VibrationEffect.createWaveform(VIBRATE_PATTERN, 0));
         } else {
-            ((Vibrator) Objects.requireNonNull(getActivity()).getSystemService(VIBRATOR_SERVICE)).vibrate(100);
+            // Below API 26
+            mVibrator.vibrate(VIBRATE_PATTERN, 0);
         }
     }
 }
