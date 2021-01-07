@@ -41,6 +41,7 @@ public class GameFragment extends Fragment {
     public static final String KEY_BROADCAST_RECEIVER_TICK = "com.ratiug.dev.colormatchgame.tick.timer";
     public static final String KEY_TIME_VALUE_STRING = "KEY_TIME_VALUE";
     public static final String KEY_TIME_VALUE_LONG = "KEY_TIME_VALUE";
+    private static final long VIBRATE_PATTERN = 500;
     public int rightAnswer, wrongAnswer, record;
     SharedPreferencesHelper mSharedPreferencesHelper;
     int color1;
@@ -72,8 +73,6 @@ public class GameFragment extends Fragment {
 
         mSharedPreferencesHelper = new SharedPreferencesHelper(Objects.requireNonNull(getContext()));
 
-        getRecordFromDB();
-
         if (mSharedPreferencesHelper.getTheme() == 1) {
             color_names = getContext().getResources().getStringArray(R.array.color_names_light);
         } else {
@@ -87,11 +86,11 @@ public class GameFragment extends Fragment {
     }
 
     private void getRecordFromDB() {
-        switch (selectedOptionsColor){
-            case 4 : record = mSharedPreferencesHelper.getRecord_4(); break;
-            case 6 : record = mSharedPreferencesHelper.getRecord_6(); break;
-            case 8 : record = mSharedPreferencesHelper.getRecord_8(); break;
-            case 10 : record = mSharedPreferencesHelper.getRecord_10(); break;
+        switch (selectedOptionsColor) {
+            case 4: record = mSharedPreferencesHelper.getRecord_4(); break;
+            case 6: record = mSharedPreferencesHelper.getRecord_6(); break;
+            case 8: record = mSharedPreferencesHelper.getRecord_8(); break;
+            case 10: record = mSharedPreferencesHelper.getRecord_10(); break;
         }
     }
 
@@ -257,11 +256,19 @@ public class GameFragment extends Fragment {
     }
 
     private void setNewRecordInDB() {
-        switch (selectedOptionsColor){
-            case 4 : mSharedPreferencesHelper.setRecord_4(record); break;
-            case 6 : mSharedPreferencesHelper.setRecord_6(record); break;
-            case 8 : mSharedPreferencesHelper.setRecord_8(record); break;
-            case 10 : mSharedPreferencesHelper.setRecord_10(record); break;
+        switch (selectedOptionsColor) {
+            case 4:
+                mSharedPreferencesHelper.setRecord_4(record);
+                break;
+            case 6:
+                mSharedPreferencesHelper.setRecord_6(record);
+                break;
+            case 8:
+                mSharedPreferencesHelper.setRecord_8(record);
+                break;
+            case 10:
+                mSharedPreferencesHelper.setRecord_10(record);
+                break;
         }
 
     }
@@ -280,11 +287,14 @@ public class GameFragment extends Fragment {
         return formatter.format(date);
     }
 
+
     private void makeVibration(int timeToVibration) {
+            Vibrator mVibrator = (Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE);
         if (Build.VERSION.SDK_INT >= 26) {
             ((Vibrator) Objects.requireNonNull(getActivity()).getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(timeToVibration, 100));
         } else {
-            ((Vibrator) Objects.requireNonNull(getActivity()).getSystemService(VIBRATOR_SERVICE)).vibrate(100);
+            // Below API 26
+            mVibrator.vibrate(new long[]{VIBRATE_PATTERN}, 0);
         }
     }
 
