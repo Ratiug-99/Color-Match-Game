@@ -1,6 +1,7 @@
 package com.ratiug.dev.colormatchgame.activities;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,18 +37,13 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mSharedPreferencesHelper = new SharedPreferencesHelper(this);
-        setThemeApp();
+        checkThemeApp();
         checkLocale();
         setFullScreen();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        Log.d(TAG, "onCreate: tokenID = " + mSharedPreferencesHelper.getTokenId() );
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                selectActivity();
-            }
-        }, 1000);
+        handler.postDelayed(this::selectActivity, 1000);
     }
 
 
@@ -78,13 +74,31 @@ public class WelcomeActivity extends AppCompatActivity {
         finish();
     }
 
-    private void setThemeApp() {//todo check theme on first load
+    private void checkThemeApp(){
+        Log.d(TAG, "checkThemeApp: " + mSharedPreferencesHelper.getTheme());
+        if (mSharedPreferencesHelper.getTheme() == -1){
+
+            int currentNightMode = getApplicationContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            switch (currentNightMode) {
+                case Configuration.UI_MODE_NIGHT_NO:
+                    mSharedPreferencesHelper.setTheme(1);
+                    break;
+                case Configuration.UI_MODE_NIGHT_YES:
+                    mSharedPreferencesHelper.setTheme(2);
+                    break;
+        }
+        }
+        setThemeApp();
+        Log.d(TAG, "checkThemeApp: " + mSharedPreferencesHelper.getTheme());
+    }
+
+    private void setThemeApp() {
         Log.d(TAG, "setThemeApp: " + mSharedPreferencesHelper.getTheme());
         AppCompatDelegate.setDefaultNightMode(mSharedPreferencesHelper.getTheme());
     }
 
     private void checkLocale() {
-        String prefLanguage = mSharedPreferencesHelper.getLanguage().trim(); //todo check on first load language and set it to SP
+        String prefLanguage = mSharedPreferencesHelper.getLanguage().trim();
         Log.d(TAG, "checkLocale: " + prefLanguage);
         if (prefLanguage.equals("")) {
             Log.d(TAG, "checkLocale: ");

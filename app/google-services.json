@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "162655197098-aaakrbiekmbodgges0n7v43fc2fmqm7j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ratiug.dev.colormatchgame",
+            "certificate_hash": "01dafe9ac4722dea8409024b2b1baa9c6703bc5f"
+          }
+        },
+        {
           "client_id": "162655197098-j0m4s92opaaupvk8c746dg220mfcuvii.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

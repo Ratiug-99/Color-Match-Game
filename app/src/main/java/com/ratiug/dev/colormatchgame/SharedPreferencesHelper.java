@@ -94,7 +94,7 @@ public class SharedPreferencesHelper {
     }
 
     public int getTheme() {
-        return mSharedPreferences.getInt(APP_PREFERENCE_THEME, 1);
+        return mSharedPreferences.getInt(APP_PREFERENCE_THEME, -1);
     }
 
     public void setTheme(int theme) {

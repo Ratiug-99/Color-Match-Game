@@ -75,7 +75,6 @@ public class GameFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         mSharedPreferencesHelper = new SharedPreferencesHelper(Objects.requireNonNull(getContext()));
 
         getRecordFromDB();
@@ -87,19 +86,19 @@ public class GameFragment extends Fragment {
         }
 
 
-
         countColorOptions = getContext().getResources().getStringArray(R.array.count_colors_for_select);
         colors = Objects.requireNonNull(getContext()).getResources().getIntArray(R.array.colors);
         selectedOptionsColor = Integer.parseInt(countColorOptions[mSharedPreferencesHelper.getCountColors()]);
         vibrationStatus = mSharedPreferencesHelper.getVibrationStatus();
+        getRecordFromDB();
     }
 
     private void getRecordFromDB() {
-        switch (selectedOptionsColor){
-            case 4 : record = mSharedPreferencesHelper.getRecord_4(); break;
-            case 6 : record = mSharedPreferencesHelper.getRecord_6(); break;
-            case 8 : record = mSharedPreferencesHelper.getRecord_8(); break;
-            case 10 : record = mSharedPreferencesHelper.getRecord_10(); break;
+        switch (selectedOptionsColor) {
+            case 4: record = mSharedPreferencesHelper.getRecord_4(); break;
+            case 6: record = mSharedPreferencesHelper.getRecord_6(); break;
+            case 8: record = mSharedPreferencesHelper.getRecord_8(); break;
+            case 10: record = mSharedPreferencesHelper.getRecord_10(); break;
         }
     }
 
@@ -302,11 +301,19 @@ public class GameFragment extends Fragment {
     }
 
     private void setNewRecordInDB() {
-        switch (selectedOptionsColor){
-            case 4 : mSharedPreferencesHelper.setRecord_4(record); break;
-            case 6 : mSharedPreferencesHelper.setRecord_6(record); break;
-            case 8 : mSharedPreferencesHelper.setRecord_8(record); break;
-            case 10 : mSharedPreferencesHelper.setRecord_10(record); break;
+        switch (selectedOptionsColor) {
+            case 4:
+                mSharedPreferencesHelper.setRecord_4(record);
+                break;
+            case 6:
+                mSharedPreferencesHelper.setRecord_6(record);
+                break;
+            case 8:
+                mSharedPreferencesHelper.setRecord_8(record);
+                break;
+            case 10:
+                mSharedPreferencesHelper.setRecord_10(record);
+                break;
         }
 
     }
