@@ -1,6 +1,9 @@
 package com.ratiug.dev.colormatchgame;
 
+import android.util.Log;
+
 public class User{
+    public static final String TAG = "DBG | USER";
 
     public String uid;
     public String email;
@@ -30,6 +33,7 @@ public class User{
         this.record_8 = record_8;
         this.record_10 = record_10;
         this.uri = uri;
+        Log.d(TAG, "User: created");
     }
 
     public String getRecord_4() {

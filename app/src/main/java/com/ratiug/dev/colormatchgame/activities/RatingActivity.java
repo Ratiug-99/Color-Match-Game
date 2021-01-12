@@ -3,6 +3,7 @@ package com.ratiug.dev.colormatchgame.activities;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -25,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ratiug.dev.colormatchgame.AdapterRating;
+import com.ratiug.dev.colormatchgame.InternetUtils;
 import com.ratiug.dev.colormatchgame.R;
 import com.ratiug.dev.colormatchgame.SharedPreferencesHelper;
 import com.ratiug.dev.colormatchgame.User;
@@ -33,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -40,6 +44,7 @@ public class RatingActivity extends AppCompatActivity {
     public static final String TAG = "DBG | RatingActivity";
     SharedPreferencesHelper mSharedPreferencesHelper;
     RadioGroup radioGroupCountColors;
+    InternetUtils internetUtils = new InternetUtils();
     int countColors;
     DatabaseReference reference;
     RecyclerView recyclerView;
@@ -107,13 +112,17 @@ public class RatingActivity extends AppCompatActivity {
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh() { //todo write correct
+                if (internetUtils.isOnline(RatingActivity.this)) {
                 showRating();
-
-                adapter.notifyDataSetChanged();
+                if (adapter != null){
+                    adapter.notifyDataSetChanged();
+                }
+                }
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+        checkConnection();
 
     }
 
@@ -270,5 +279,21 @@ public class RatingActivity extends AppCompatActivity {
     protected void onStop() {
         Log.d(TAG, "onStop: ");
         super.onStop();
+    }
+
+    private void checkConnection(){
+        Log.d(TAG, "checkConnection: "+ pbLoading.getVisibility());
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (pbLoading.getVisibility() == View.VISIBLE) {
+                    Log.d(TAG, "run: +");
+                    runOnUiThread(() -> internetUtils.isOnline(RatingActivity.this));
+                }
+
+            }
+
+        }, 5000, 30000);
     }
 }

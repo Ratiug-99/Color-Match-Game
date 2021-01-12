@@ -29,12 +29,7 @@ public class GameOverFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_game_over, container, false);
 
         btnRestart = view.findViewById(R.id.btn_restart_game);
-        btnRestart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                restartGame();
-            }
-        });
+        btnRestart.setOnClickListener(view1 -> restartGame());
 
         return view;
     }
