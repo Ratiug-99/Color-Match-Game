@@ -26,9 +26,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="45dp"
         android:fontFamily="cursive"
-        android:text="by Ratiug Dev."
+        android:text="@string/by_ratiug_dev"
         android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
