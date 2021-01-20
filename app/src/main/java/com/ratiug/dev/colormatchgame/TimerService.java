@@ -22,7 +22,7 @@ public class TimerService extends Service {
     }
 
     private void startTimer() {
-        countDownTimer = new CountDownTimer(6000, 1000) { //61
+        countDownTimer = new CountDownTimer(61000, 1000) { //61
             @Override
             public void onTick(long mlsToFinish) {
                 sendBroadcast(new Intent(GameFragment.KEY_BROADCAST_RECEIVER_TICK)
